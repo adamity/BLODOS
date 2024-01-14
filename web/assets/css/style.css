@@ -1,0 +1,103 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --color-seance: #812990;
+}
+
+.text-seance {
+    color: var(--color-seance) !important;
+}
+
+/* dt-row */
+.dt-row {
+    min-height: 50vh !important;
+}
+
+.page-link {
+    margin-left: .5rem !important;
+    font-size: 0.875rem !important;
+}
+
+.text-bg-light-cyan {
+    background-color: #7FFFD4 !important;
+}
+
+.text-bg-mustard-yellow {
+    background-color: #FFDB58 !important;
+}
+
+.text-bg-mint-green {
+    background-color: #98FB98 !important;
+}
+
+.text-bg-teal {
+    background-color: #008080 !important;
+}
+
+.text-bg-bronze {
+    background-color: #CD7F32 !important;
+}
+
+.text-bg-dark-salmon {
+    background-color: #E9967A !important;
+}
+
+.text-bg-slate-gray {
+    background-color: #708090 !important;
+}
+
+.text-bg-indigo {
+    background-color: #4B0082 !important;
+}
+
+.text-bg-olive-green {
+    background-color: #808000 !important;
+}
+
+.text-bg-strikemaster {
+    background-color: #A064A0 !important;
+}
+
+.text-bg-seagull {
+    background-color: #87CEEB !important;
+}
+
+.text-bg-mauve {
+    background-color: #784b84 !important;
+}
+
+.text-bg-hibiscus {
+    background-color: #b43757 !important;
+}
+
+.text-bg-dusty-gray {
+    background-color: #999999 !important;
+}
+
+.text-bg-danube {
+    background-color: #6fa8dc !important;
+}
+
+.text-bg-gulf-stream {
+    background-color: #76a5af !important;
+}
+
+.text-bg-olivine {
+    background-color: #93c47d !important;
+}
+
+.text-bg-wisteria {
+    background-color: #8e7cc3 !important;
+}
+
+.text-bg-viola {
+    background-color: #c27ba0 !important;
+}
+
+.text-bg-sunglo {
+    background-color: #e06666 !important;
+}
+
+.text-bg-rajah {
+    background-color: #f6b26b !important;
+}
