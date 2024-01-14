@@ -7,7 +7,7 @@
                 <p class="fs-6 fw-light text-seance">Blood Donation System</p>
             </div>
 
-            <form class="mt-5">
+            <form action="LoginServlet" method="post" class="mt-5">
                 <div class="mb-3">
                     <label for="email" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required />
