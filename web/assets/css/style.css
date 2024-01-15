@@ -8,6 +8,59 @@
     color: var(--color-seance) !important;
 }
 
+.text-wisteria {
+    color: #8e7cc3 !important;
+}
+
+.text-olivine {
+    color: #93c47d !important;
+}
+
+.text-sunglo {
+    color: #e06666 !important;
+}
+
+.card-wisteria {
+    background-color: #8e7cc333 !important;
+    color: #8e7cc3 !important;
+}
+
+.card-olivine {
+    background-color: #93c47d33 !important;
+    color: #93c47d !important;
+}
+
+.card-sunglo {
+    background-color: #e0666633 !important;
+    color: #e06666 !important;
+}
+
+.card-hibiscus {
+    background-color: #b4375733 !important;
+    color: #b43757 !important;
+
+}
+
+.card-gulf-stream {
+    background-color: #76a5af33 !important;
+    color: #76a5af !important;
+}
+
+.card-rajah {
+    background-color: #f6b26b33 !important;
+    color: #f6b26b !important;
+}
+
+.card-mauve {
+    background-color: #784b8433 !important;
+    color: #784b84 !important;
+}
+
+.card-danube {
+    background-color: #6fa8dc33 !important;
+    color: #6fa8dc !important;
+}
+
 /* dt-row */
 .dt-row {
     min-height: 50vh !important;
@@ -18,87 +71,87 @@
     font-size: 0.875rem !important;
 }
 
-.text-bg-light-cyan {
+.bg-light-cyan {
     background-color: #7FFFD4 !important;
 }
 
-.text-bg-mustard-yellow {
+.bg-mustard-yellow {
     background-color: #FFDB58 !important;
 }
 
-.text-bg-mint-green {
+.bg-mint-green {
     background-color: #98FB98 !important;
 }
 
-.text-bg-teal {
+.bg-teal {
     background-color: #008080 !important;
 }
 
-.text-bg-bronze {
+.bg-bronze {
     background-color: #CD7F32 !important;
 }
 
-.text-bg-dark-salmon {
+.bg-dark-salmon {
     background-color: #E9967A !important;
 }
 
-.text-bg-slate-gray {
+.bg-slate-gray {
     background-color: #708090 !important;
 }
 
-.text-bg-indigo {
+.bg-indigo {
     background-color: #4B0082 !important;
 }
 
-.text-bg-olive-green {
+.bg-olive-green {
     background-color: #808000 !important;
 }
 
-.text-bg-strikemaster {
+.bg-strikemaster {
     background-color: #A064A0 !important;
 }
 
-.text-bg-seagull {
+.bg-seagull {
     background-color: #87CEEB !important;
 }
 
-.text-bg-mauve {
+.bg-mauve {
     background-color: #784b84 !important;
 }
 
-.text-bg-hibiscus {
+.bg-hibiscus {
     background-color: #b43757 !important;
 }
 
-.text-bg-dusty-gray {
+.bg-dusty-gray {
     background-color: #999999 !important;
 }
 
-.text-bg-danube {
+.bg-danube {
     background-color: #6fa8dc !important;
 }
 
-.text-bg-gulf-stream {
+.bg-gulf-stream {
     background-color: #76a5af !important;
 }
 
-.text-bg-olivine {
+.bg-olivine {
     background-color: #93c47d !important;
 }
 
-.text-bg-wisteria {
+.bg-wisteria {
     background-color: #8e7cc3 !important;
 }
 
-.text-bg-viola {
+.bg-viola {
     background-color: #c27ba0 !important;
 }
 
-.text-bg-sunglo {
+.bg-sunglo {
     background-color: #e06666 !important;
 }
 
-.text-bg-rajah {
+.bg-rajah {
     background-color: #f6b26b !important;
 }
 
