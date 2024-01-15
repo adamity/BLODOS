@@ -101,3 +101,7 @@
 .text-bg-rajah {
     background-color: #f6b26b !important;
 }
+
+.min-height-75vh {
+    min-height: 75vh !important;
+}

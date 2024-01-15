@@ -1,4 +1,4 @@
-<div class="container vh-100">
+<div style="height: 75vh;">
     <div class="d-flex justify-content-center align-items-center h-100">
         <div class="card border-0 shadow">
         <div class="card-body mx-4 my-3">

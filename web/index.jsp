@@ -16,7 +16,9 @@
     <jsp:include page="layouts/alert.jsp"/>
 
     <main>
-        <jsp:include page="pages/${action != null ? action : 'login'}.jsp"/>
+        <div class="container my-5 min-height-75vh">
+            <jsp:include page="pages/${action != null ? action : 'login'}.jsp"/>
+        </div>
     </main>
 
     <jsp:include page="layouts/footer.jsp"/>
