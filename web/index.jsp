@@ -13,6 +13,7 @@
 
 <body class="bg-light-subtle">
     <jsp:include page="layouts/navbar.jsp"/>
+    <jsp:include page="layouts/alert.jsp"/>
 
     <main>
         <jsp:include page="pages/${action != null ? action : 'login'}.jsp"/>
