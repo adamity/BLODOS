@@ -27,6 +27,7 @@
                         <th scope="col">Meal Before Donation</th>
                         <th scope="col">Medical Illness</th>
                         <th scope="col">High Risk Activity</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -40,6 +41,7 @@
                         <td>Yes</td>
                         <td>No</td>
                         <td>No</td>
+                        <td>Eligible</td>
                         <td>
                             <a href="#">View</a>
                         </td>
@@ -52,6 +54,7 @@
                         <td>No</td>
                         <td>Yes</td>
                         <td>Yes</td>
+                        <td>Ineligible</td>
                         <td>
                             <a href="#">View</a>
                         </td>
