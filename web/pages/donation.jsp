@@ -56,8 +56,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="createDonationModal" tabindex="-1" aria-labelledby="createDonationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="createDonationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createDonationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="createDonationModalLabel">Create New Donation</h1>
@@ -65,12 +65,67 @@
             </div>
 
             <div class="modal-body">
-                ...
+                <!--
+                Donor ID (Donor) (Search)
+                User ID (User) (Handle on backend)
+                Date
+                Time
+                Quantity (ml)
+                Status (Dropdown)
+                -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="donorId" class="form-label">Donor</label>
+                            <select class="form-select" id="donorId" name="donorId" required>
+                                <option value="" selected disabled hidden>Select Donor</option>
+                                <option value="100">100 - John Doe</option>
+                                <option value="101">101 - Jane Doe</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="date" name="date" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <div class="mb-3">
+                            <label for="time" class="form-label">Time</label>
+                            <input type="time" class="form-control" id="time" name="time" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity (ml)</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" placeholder="e.g. 470" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="" selected disabled hidden>Select Status</option>
+                                <option value="Confirmed">Confirmed</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-sm btn-primary shadow-0 text-capitalize">
+                    <i class="bi bi-upload me-2"></i>
+                    Submit
+                </button>
             </div>
         </div>
     </div>

@@ -65,7 +65,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="createDonationTypeModal" tabindex="-1" aria-labelledby="createDonationTypeModalLabel" aria-hidden="true">
+<div class="modal fade" id="createDonationTypeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createDonationTypeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -74,12 +74,15 @@
             </div>
 
             <div class="modal-body">
-                ...
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Whole Blood" required>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-sm btn-primary shadow-0 text-capitalize">
+                    <i class="bi bi-upload me-2"></i>
+                    Submit
+                </button>
             </div>
         </div>
     </div>
