@@ -24,12 +24,12 @@
                 <i class="bi bi-people me-2"></i>Donor
             </a>
 
-            <a href="RouteServlet?action=donation" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
-                <i class="bi bi-journal-medical me-2"></i>Donation
-            </a>
-
             <a href="RouteServlet?action=eligibility" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
                 <i class="bi bi-person-check me-2"></i>Eligibility
+            </a>
+
+            <a href="RouteServlet?action=donation" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
+                <i class="bi bi-journal-medical me-2"></i>Donation
             </a>
 
             <!-- 
