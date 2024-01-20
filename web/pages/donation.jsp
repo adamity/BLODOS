@@ -35,7 +35,7 @@
                         <td>470</td>
                         <td>Completed</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +47,7 @@
                         <td>470</td>
                         <td>Completed</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                 </tbody>

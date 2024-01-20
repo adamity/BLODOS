@@ -29,7 +29,7 @@
                         <td>Whole Blood</td>
                         <td>2</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                     <tr>
@@ -38,7 +38,7 @@
                         <td>Platelet</td>
                         <td>1</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +47,7 @@
                         <td>Plasma</td>
                         <td>0</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                     <tr>
@@ -56,7 +56,7 @@
                         <td>Red Blood Cell</td>
                         <td>0</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                 </tbody>

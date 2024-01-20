@@ -39,7 +39,7 @@
                         <td>1</td>
                         <td>2</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                     <tr>
@@ -53,7 +53,7 @@
                         <td>1</td>
                         <td>0</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                 </tbody>

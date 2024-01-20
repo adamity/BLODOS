@@ -33,7 +33,7 @@
                         <td>admin001</td>
                         <td>Admin</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                     <tr>
@@ -44,7 +44,7 @@
                         <td>staff001</td>
                         <td>Staff</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                     <tr>
@@ -55,7 +55,7 @@
                         <td>staff002</td>
                         <td>Staff</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                 </tbody>

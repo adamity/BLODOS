@@ -37,7 +37,7 @@
                         <td>No</td>
                         <td>Eligible</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@
                         <td>Yes</td>
                         <td>Ineligible</td>
                         <td>
-                            <a href="#">View</a>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
                 </tbody>
