@@ -38,18 +38,6 @@
                             <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationModal" onclick="upsertInit('009')">Edit</button>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>010</td>
-                        <td>John Doe</td>
-                        <td>17/10/2023</td>
-                        <td>09:30</td>
-                        <td>470</td>
-                        <td>Completed</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationModal" onclick="upsertInit('010')">Edit</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>

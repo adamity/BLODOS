@@ -40,19 +40,6 @@
                             <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertEligibilityModal" onclick="upsertInit('100')">Edit</button>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>101</td>
-                        <td>Jane Doe</td>
-                        <td>7</td>
-                        <td>No</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td>Ineligible</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertEligibilityModal" onclick="upsertInit('101')">Edit</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>

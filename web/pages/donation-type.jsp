@@ -32,33 +32,6 @@
                             <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationTypeModal" onclick="upsertInit('100')">Edit</button>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>101</td>
-                        <td>Platelet</td>
-                        <td>1</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationTypeModal" onclick="upsertInit('101')">Edit</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>102</td>
-                        <td>Plasma</td>
-                        <td>0</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationTypeModal" onclick="upsertInit('102')">Edit</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>103</td>
-                        <td>Red Blood Cell</td>
-                        <td>0</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationTypeModal" onclick="upsertInit('103')">Edit</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>

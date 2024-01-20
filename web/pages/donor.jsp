@@ -42,20 +42,6 @@
                             <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonorModal" onclick="upsertInit('100')">Edit</button>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>101</td>
-                        <td>210801-12-1234</td>
-                        <td>Jane Doe</td>
-                        <td>21/08/2001</td>
-                        <td>Female</td>
-                        <td>B</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonorModal" onclick="upsertInit('101')">Edit</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>

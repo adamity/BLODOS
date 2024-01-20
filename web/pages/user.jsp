@@ -36,28 +36,6 @@
                             <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertUserModal" onclick="upsertInit('100')">Edit</button>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>101</td>
-                        <td>Staff</td>
-                        <td>001</td>
-                        <td>staff001</td>
-                        <td>Staff</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertUserModal" onclick="upsertInit('101')">Edit</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>102</td>
-                        <td>Staff</td>
-                        <td>002</td>
-                        <td>staff002</td>
-                        <td>Staff</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertUserModal" onclick="upsertInit('102')">Edit</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
