@@ -2,7 +2,7 @@
     <div class="card-body d-flex justify-content-between align-items-center">
         <p class="m-0 fs-4 fw-semibold">Donor</p>
 
-        <button type="button" class="btn btn-sm btn-primary shadow-0 text-capitalize ms-2" data-bs-toggle="modal" data-bs-target="#createDonorModal">
+        <button type="button" class="btn btn-sm btn-primary shadow-0 text-capitalize ms-2" data-bs-toggle="modal" data-bs-target="#upsertDonorModal" onclick="upsertInit()">
             <i class="bi bi-plus-lg me-2"></i>Create
         </button>
     </div>
@@ -39,7 +39,7 @@
                         <td>1</td>
                         <td>2</td>
                         <td>
-                            <a href="#">Edit</a>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('100')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -53,7 +53,7 @@
                         <td>1</td>
                         <td>0</td>
                         <td>
-                            <a href="#">Edit</a>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('101')">Edit</button>
                         </td>
                     </tr>
                 </tbody>
@@ -62,11 +62,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="createDonorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createDonorModalLabel" aria-hidden="true">
+<div class="modal fade" id="upsertDonorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="upsertDonorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="createDonorModalLabel">Create New Donor</h1>
+                <h1 class="modal-title fs-5" id="upsertDonorModalLabel">Create New Donor</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -163,3 +163,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function upsertInit(id = null) {
+        if (id) {
+            console.log('Edit');
+        } else {
+            console.log('Create');
+        }
+    }
+</script>

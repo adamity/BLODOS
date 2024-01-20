@@ -2,7 +2,7 @@
     <div class="card-body d-flex justify-content-between align-items-center">
         <p class="m-0 fs-4 fw-semibold">User</p>
 
-        <button type="button" class="btn btn-sm btn-primary shadow-0 text-capitalize ms-2" data-bs-toggle="modal" data-bs-target="#createUserModal">
+        <button type="button" class="btn btn-sm btn-primary shadow-0 text-capitalize ms-2" data-bs-toggle="modal" data-bs-target="#upsertUserModal" onclick="upsertInit()">
             <i class="bi bi-plus-lg me-2"></i>Create
         </button>
     </div>
@@ -33,7 +33,7 @@
                         <td>admin001</td>
                         <td>Admin</td>
                         <td>
-                            <a href="#">Edit</a>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('100')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -44,7 +44,7 @@
                         <td>staff001</td>
                         <td>Staff</td>
                         <td>
-                            <a href="#">Edit</a>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('101')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -55,7 +55,7 @@
                         <td>staff002</td>
                         <td>Staff</td>
                         <td>
-                            <a href="#">Edit</a>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('102')">Edit</button>
                         </td>
                     </tr>
                 </tbody>
@@ -64,11 +64,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="createUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="upsertUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="upsertUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="createUserModalLabel">Create New User</h1>
+                <h1 class="modal-title fs-5" id="upsertUserModalLabel">Create New User</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -132,3 +132,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function upsertInit(id = null) {
+        if (id) {
+            console.log('Edit');
+        } else {
+            console.log('Create');
+        }
+    }
+</script>

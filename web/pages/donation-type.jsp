@@ -2,7 +2,7 @@
     <div class="card-body d-flex justify-content-between align-items-center">
         <p class="m-0 fs-4 fw-semibold">Donation Type</p>
 
-        <button type="button" class="btn btn-sm btn-primary shadow-0 text-capitalize ms-2" data-bs-toggle="modal" data-bs-target="#createDonationTypeModal">
+        <button type="button" class="btn btn-sm btn-primary shadow-0 text-capitalize ms-2" data-bs-toggle="modal" data-bs-target="#upsertDonationTypeModal" onclick="upsertInit()">
             <i class="bi bi-plus-lg me-2"></i>Create
         </button>
     </div>
@@ -29,7 +29,7 @@
                         <td>Whole Blood</td>
                         <td>2</td>
                         <td>
-                            <a href="#">Edit</a>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('100')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -38,7 +38,7 @@
                         <td>Platelet</td>
                         <td>1</td>
                         <td>
-                            <a href="#">Edit</a>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('101')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +47,7 @@
                         <td>Plasma</td>
                         <td>0</td>
                         <td>
-                            <a href="#">Edit</a>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('102')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -56,7 +56,7 @@
                         <td>Red Blood Cell</td>
                         <td>0</td>
                         <td>
-                            <a href="#">Edit</a>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('103')">Edit</button>
                         </td>
                     </tr>
                 </tbody>
@@ -65,11 +65,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="createDonationTypeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createDonationTypeModalLabel" aria-hidden="true">
+<div class="modal fade" id="upsertDonationTypeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="upsertDonationTypeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="createDonationTypeModalLabel">Create New Donation Type</h1>
+                <h1 class="modal-title fs-5" id="upsertDonationTypeModalLabel">Create New Donation Type</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -87,3 +87,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function upsertInit(id = null) {
+        if (id) {
+            console.log('Edit');
+        } else {
+            console.log('Create');
+        }
+    }
+</script>
