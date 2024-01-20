@@ -1,3 +1,5 @@
+<% String role = (String) session.getAttribute("role"); %>
+
 <div class="card border-0 shadow mb-3">
     <div class="card-body d-flex justify-content-between align-items-center">
         <p class="m-0 fs-4 fw-semibold">Eligibility</p>
@@ -38,6 +40,11 @@
                         <td>Eligible</td>
                         <td>
                             <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertEligibilityModal" onclick="upsertInit('100')">Edit</button>
+                            <% if (role != null && role.equals("admin")) { %>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#deleteEligibilityModal" onclick="deleteInit('100')">
+                                Delete
+                            </button>
+                            <% } %>
                         </td>
                     </tr>
                 </tbody>
@@ -128,6 +135,36 @@
     </div>
 </div>
 
+<% if (role != null && role.equals("admin")) { %>
+<div class="modal fade" id="deleteEligibilityModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteEligibilityModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteEligibilityModalLabel">Delete Eligibility</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body text-center my-3">
+                <i class="bi bi-exclamation-triangle-fill text-warning fs-1 mb-3"></i>
+                <p class="fs-4 fw-semibold">Eligibility ID: #<span id="eligibilityID"></span></p>
+                <p class="mb-3">
+                    Are you sure you want to delete this eligibility?
+                    <br>
+                    This action cannot be undone.
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger shadow-0 text-capitalize" data-bs-dismiss="modal">
+                    <i class="bi bi-trash me-2"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+
 <script>
     function upsertInit(id = null) {
         if (id) {
@@ -135,5 +172,9 @@
         } else {
             document.getElementById('upsertEligibilityModalLabel').innerHTML = 'Create New Eligibility';
         }
+    }
+
+    function deleteInit(id) {
+        document.getElementById('eligibilityID').innerHTML = id;
     }
 </script>
