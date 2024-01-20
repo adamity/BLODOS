@@ -35,7 +35,7 @@
                         <td>470</td>
                         <td>Completed</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('009')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationModal" onclick="upsertInit('009')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +47,7 @@
                         <td>470</td>
                         <td>Completed</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('010')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationModal" onclick="upsertInit('010')">Edit</button>
                         </td>
                     </tr>
                 </tbody>
@@ -60,7 +60,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="upsertDonationModalLabel">Create New Donation</h1>
+                <h1 class="modal-title fs-5" id="upsertDonationModalLabel"></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -134,9 +134,9 @@
 <script>
     function upsertInit(id = null) {
         if (id) {
-            console.log('Edit');
+            document.getElementById('upsertDonationModalLabel').innerHTML = 'Edit Donation';
         } else {
-            console.log('Create');
+            document.getElementById('upsertDonationModalLabel').innerHTML = 'Create New Donation';
         }
     }
 </script>

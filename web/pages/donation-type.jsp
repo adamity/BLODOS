@@ -29,7 +29,7 @@
                         <td>Whole Blood</td>
                         <td>2</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('100')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationTypeModal" onclick="upsertInit('100')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -38,7 +38,7 @@
                         <td>Platelet</td>
                         <td>1</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('101')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationTypeModal" onclick="upsertInit('101')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +47,7 @@
                         <td>Plasma</td>
                         <td>0</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('102')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationTypeModal" onclick="upsertInit('102')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -56,7 +56,7 @@
                         <td>Red Blood Cell</td>
                         <td>0</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('103')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationTypeModal" onclick="upsertInit('103')">Edit</button>
                         </td>
                     </tr>
                 </tbody>
@@ -69,7 +69,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="upsertDonationTypeModalLabel">Create New Donation Type</h1>
+                <h1 class="modal-title fs-5" id="upsertDonationTypeModalLabel"></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -91,9 +91,9 @@
 <script>
     function upsertInit(id = null) {
         if (id) {
-            console.log('Edit');
+            document.getElementById('upsertDonationTypeModalLabel').innerHTML = 'Edit Donation Type';
         } else {
-            console.log('Create');
+            document.getElementById('upsertDonationTypeModalLabel').innerHTML = 'Create New Donation Type';
         }
     }
 </script>

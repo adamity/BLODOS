@@ -37,7 +37,7 @@
                         <td>No</td>
                         <td>Eligible</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('100')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertEligibilityModal" onclick="upsertInit('100')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@
                         <td>Yes</td>
                         <td>Ineligible</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('101')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertEligibilityModal" onclick="upsertInit('101')">Edit</button>
                         </td>
                     </tr>
                 </tbody>
@@ -63,7 +63,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="upsertEligibilityModalLabel">Create New Eligibility</h1>
+                <h1 class="modal-title fs-5" id="upsertEligibilityModalLabel"></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -144,9 +144,9 @@
 <script>
     function upsertInit(id = null) {
         if (id) {
-            console.log('Edit');
+            document.getElementById('upsertEligibilityModalLabel').innerHTML = 'Edit Eligibility';
         } else {
-            console.log('Create');
+            document.getElementById('upsertEligibilityModalLabel').innerHTML = 'Create New Eligibility';
         }
     }
 </script>

@@ -33,7 +33,7 @@
                         <td>admin001</td>
                         <td>Admin</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('100')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertUserModal" onclick="upsertInit('100')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -44,7 +44,7 @@
                         <td>staff001</td>
                         <td>Staff</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('101')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertUserModal" onclick="upsertInit('101')">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -55,7 +55,7 @@
                         <td>staff002</td>
                         <td>Staff</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" onclick="upsertInit('102')">Edit</button>
+                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertUserModal" onclick="upsertInit('102')">Edit</button>
                         </td>
                     </tr>
                 </tbody>
@@ -68,7 +68,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="upsertUserModalLabel">Create New User</h1>
+                <h1 class="modal-title fs-5" id="upsertUserModalLabel"></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -136,9 +136,9 @@
 <script>
     function upsertInit(id = null) {
         if (id) {
-            console.log('Edit');
+            document.getElementById('upsertUserModalLabel').innerHTML = 'Edit User';
         } else {
-            console.log('Create');
+            document.getElementById('upsertUserModalLabel').innerHTML = 'Create New User';
         }
     }
 </script>
