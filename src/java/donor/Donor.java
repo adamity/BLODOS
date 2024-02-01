@@ -1,13 +1,175 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package donor;
 
-/**
- *
- * @author zul
- */
 public class Donor {
-    
+    // Donor class represents a user in the database
+    // - id
+    // - user_id
+    // - referrer_donor_id
+    // - ic_number
+    // - fullname
+    // - dob
+    // - gender
+    // - weight
+    // - height
+    // - blood_type
+    // - created_at
+    // - updated_at
+    // Note: id, created_at, updated_at are auto-generated on the database level
+
+    protected int id;
+    protected int user_id;
+    protected int referrer_donor_id;
+    protected String ic_number;
+    protected String fullname;
+    protected String dob;
+    protected String gender;
+    protected int weight;
+    protected int height;
+    protected String blood_type;
+
+    public Donor() {
+    }
+
+    public Donor(
+            int user_id,
+            int referrer_donor_id,
+            String ic_number,
+            String fullname,
+            String dob,
+            String gender,
+            int weight,
+            int height,
+            String blood_type) {
+        this.user_id = user_id;
+        this.referrer_donor_id = referrer_donor_id;
+        this.ic_number = ic_number;
+        this.fullname = fullname;
+        this.dob = dob;
+        this.gender = gender;
+        this.weight = weight;
+        this.height = height;
+        this.blood_type = blood_type;
+    }
+
+    public Donor(
+            int id,
+            int user_id,
+            int referrer_donor_id,
+            String ic_number,
+            String fullname,
+            String dob,
+            String gender,
+            int weight,
+            int height,
+            String blood_type) {
+        this.id = id;
+        this.user_id = user_id;
+        this.referrer_donor_id = referrer_donor_id;
+        this.ic_number = ic_number;
+        this.fullname = fullname;
+        this.dob = dob;
+        this.gender = gender;
+        this.weight = weight;
+        this.height = height;
+        this.blood_type = blood_type;
+    }
+
+    // Getters
+    public int getId() {
+        return id;
+    }
+
+    public int getUserId() {
+        return user_id;
+    }
+
+    public int getReferrerDonorId() {
+        return referrer_donor_id;
+    }
+
+    public String getIcNumber() {
+        return ic_number;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public String getBloodType() {
+        return blood_type;
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUserId(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setReferrerDonorId(int referrer_donor_id) {
+        this.referrer_donor_id = referrer_donor_id;
+    }
+
+    public void setIcNumber(String ic_number) {
+        this.ic_number = ic_number;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setBloodType(String blood_type) {
+        this.blood_type = blood_type;
+    }
+
+    // toString() method
+    @Override
+    public String toString() {
+        return "Donor{" +
+                "id=" + id +
+                ", user_id=" + user_id +
+                ", referrer_donor_id=" + referrer_donor_id +
+                ", ic_number='" + ic_number + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", dob='" + dob + '\'' +
+                ", gender=" + gender + '\'' +
+                ", weight=" + weight + '\'' +
+                ", height=" + height + '\'' +
+                ", blood_type=" + blood_type + '\'' +
+                '}';
+    }
 }

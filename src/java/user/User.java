@@ -39,7 +39,7 @@ public class User {
         this.password = password;
     }
 
-    // Getters and setters for all fields
+    // Getters
     public int getId() {
         return id;
     }
@@ -56,7 +56,6 @@ public class User {
         return lastname;
     }
 
-    // Username is unique, so it can be used as an identifier
     public String getUsername() {
         return username;
     }
