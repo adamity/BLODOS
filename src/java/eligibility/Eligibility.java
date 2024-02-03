@@ -112,4 +112,9 @@ public class Eligibility {
                 ", high_risk_activity=" + high_risk_activity +
                 '}';
     }
+
+    // toJSON() method
+    public String toJSON() {
+        return "{\"id\":" + id + ",\"donor_id\":" + donor_id + ",\"sleep_hours\":" + sleep_hours + ",\"meal_before_donation\":" + meal_before_donation + ",\"medical_illness\":" + medical_illness + ",\"high_risk_activity\":" + high_risk_activity + "}";
+    }
 }

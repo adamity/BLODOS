@@ -100,4 +100,9 @@ public class User {
                 ", username='" + username + '\'' +
                 '}';
     }
+
+    // toJSON() method
+    public String toJSON() {
+        return "{\"id\":" + id + ",\"role\":\"" + role + "\",\"firstname\":\"" + firstname + "\",\"lastname\":\"" + lastname + "\",\"username\":\"" + username + "\"}";
+    }
 }

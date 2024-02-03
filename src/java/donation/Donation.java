@@ -114,4 +114,9 @@ public class Donation {
                 ", status=" + status +
                 '}';
     }
+
+    // toJSON() method
+    public String toJSON() {
+        return "{\"id\":" + id + ",\"donor_id\":" + donor_id + ",\"user_id\":" + user_id + ",\"date\":\"" + date + "\",\"time\":\"" + time + "\",\"quantity\":" + quantity + ",\"status\":\"" + status + "\"}";
+    }
 }

@@ -49,4 +49,9 @@ public class DonationType {
                 ", type_name='" + type_name + '\'' +
                 '}';
     }
+
+    // toJSON() method
+    public String toJSON() {
+        return "{\"id\":" + id + ",\"type_name\":\"" + type_name + "\"}";
+    }
 }

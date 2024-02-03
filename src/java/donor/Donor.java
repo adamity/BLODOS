@@ -172,4 +172,9 @@ public class Donor {
                 ", blood_type=" + blood_type + '\'' +
                 '}';
     }
+
+    // toJSON() method
+    public String toJSON() {
+        return "{\"id\":" + id + ",\"user_id\":" + user_id + ",\"referrer_donor_id\":" + referrer_donor_id + ",\"ic_number\":\"" + ic_number + "\",\"fullname\":\"" + fullname + "\",\"dob\":\"" + dob + "\",\"gender\":\"" + gender + "\",\"weight\":" + weight + ",\"height\":" + height + ",\"blood_type\":\"" + blood_type + "\"}";
+    }
 }
