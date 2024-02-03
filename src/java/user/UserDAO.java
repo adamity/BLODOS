@@ -22,6 +22,14 @@ public class UserDAO {
     // * update(User user)
     // * delete(int id)
 
+    public UserDAO() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         // Do simple testing here
         UserDAO userDAO = new UserDAO();

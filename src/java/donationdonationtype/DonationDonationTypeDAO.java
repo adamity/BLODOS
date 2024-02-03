@@ -22,6 +22,14 @@ public class DonationDonationTypeDAO {
     // * update(DonationDonationType donationDonationType)
     // * delete(int id)
 
+    public DonationDonationTypeDAO() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         // Do simple testing here
         DonationDonationTypeDAO donationDonationTypeDAO = new DonationDonationTypeDAO();

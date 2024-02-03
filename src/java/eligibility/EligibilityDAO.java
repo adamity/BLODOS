@@ -22,6 +22,14 @@ public class EligibilityDAO {
     // * update(Eligibility eligibility)
     // * delete(int id)
 
+    public EligibilityDAO() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         // Do simple testing here
         EligibilityDAO eligibilityDAO = new EligibilityDAO();
