@@ -1,3 +1,4 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <% String role = (String) session.getAttribute("role"); %>
 
 <div class="card border-0 shadow mb-3">
@@ -22,27 +23,29 @@
                         <th scope="col">Lastname</th>
                         <th scope="col">Username</th>
                         <th scope="col">Role</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>100</td>
-                        <td>Admin</td>
-                        <td>001</td>
-                        <td>admin001</td>
-                        <td>Admin</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertUserModal" onclick="upsertInit('100')">Edit</button>
-                            <% if (role != null && role.equals("admin")) { %>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#deleteUserModal" onclick="deleteInit('100')">
-                                Delete
-                            </button>
-                            <% } %>
-                        </td>
-                    </tr>
+                    <c:forEach var="user" items="${userList}" varStatus="num">
+                        <tr>
+                            <th scope="row">${num.index + 1}</th>
+                            <td>${user.getId()}</td>
+                            <td>${user.getFirstname()}</td>
+                            <td>${user.getLastname()}</td>
+                            <td>${user.getUsername()}</td>
+                            <td>${user.getRole()}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-sm btn-link text-capitalize p-0 mx-1" data-bs-toggle="modal" data-bs-target="#upsertUserModal" onclick="upsertInit('${user.getId()}')">Edit</button>
+                                <% if (role != null && role.equals("admin")) { %>
+                                <button type="button" class="btn btn-sm btn-link text-capitalize p-0 mx-1" data-bs-toggle="modal" data-bs-target="#deleteUserModal" onclick="deleteInit('${user.getId()}')">
+                                    Delete
+                                </button>
+                                <% } %>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

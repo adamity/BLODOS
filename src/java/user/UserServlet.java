@@ -1,10 +1,7 @@
 package user;
 
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,7 +18,7 @@ public class UserServlet extends HttpServlet {
         String alert = "";
 
         if (action == null || action.equals("/")) {
-            // Print something html here to test
+            // Get all users
             if (request.getSession() != null && request.getSession().getAttribute("token") != null) {
                 request.getSession().setAttribute("action", "user");
                 request.getSession().setAttribute("title", "User");

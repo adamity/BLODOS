@@ -1,3 +1,5 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <div class="card border-0 shadow mb-3">
     <div class="card-body d-flex justify-content-between align-items-center">
         <p class="m-0 fs-4 fw-semibold">Dashboard</p>

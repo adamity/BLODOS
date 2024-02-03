@@ -44,7 +44,7 @@
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="RouteServlet?action=donation-type">Donation Type</a></li>
-                    <li><a class="dropdown-item" href="RouteServlet?action=user">User</a></li>
+                    <li><a class="dropdown-item" href="users">User</a></li>
                 </ul>
             </div>
             <% } %>

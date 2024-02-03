@@ -1,3 +1,4 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <% String role = (String) session.getAttribute("role"); %>
 
 <div class="card border-0 shadow mb-3">
