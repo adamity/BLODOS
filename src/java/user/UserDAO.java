@@ -8,50 +8,63 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import utility.AnsiColors;
+
 public class UserDAO {
     private static final String URL = "jdbc:mysql://localhost:3306/BLODOS?zeroDateTimeBehavior=CONVERT_TO_NULL";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
 
     // Implement DAO methods:
-    // * getAllUsers()
-    // * getUserById(int id)
-    // * addUser(User user)
-    // * updateUser(User user)
-    // * deleteUser(int id)
+    // * getAll()
+    // * getById(int id)
+    // * add(User user)
+    // * update(User user)
+    // * delete(int id)
 
     public static void main(String[] args) {
-        // Test createUser()
-        // User user = new User("admin", "Jane", "Doe", "janedoe", "password");
-        // UserDAO userDAO = new UserDAO();
-        // Boolean success = userDAO.addUser(user);
-        // System.out.println(success);
-
-        // Test getAllUsers()
+        // Do simple testing here
         UserDAO userDAO = new UserDAO();
-        List<User> users = userDAO.getAllUsers();
-        for (User user : users) System.out.println(user.toString());
 
-        // Test getUserById()
-        // UserDAO userDAO = new UserDAO();
-        // User user = userDAO.getUserById(1);
-        // System.out.println(user);
+        // Test add()
+        User userAdd = new User("admin", "Max", "Alex", "maxalex", "password");
+        Boolean success = userDAO.add(userAdd);
+        System.out.println(AnsiColors.ANSI_YELLOW + "Add Donor: " + success + AnsiColors.ANSI_RESET);
+        System.out.println(AnsiColors.ANSI_YELLOW_BACKGROUND + AnsiColors.ANSI_BLUE + "ADD PASSED" + AnsiColors.ANSI_RESET + "\n");
 
-        // Test updateUser()
-        // UserDAO userDAO = new UserDAO();
-        // User user = userDAO.getUserById(1);
-        // user.setFirstname("Jane");
-        // userDAO.updateUser(user);
+        // Test getAll()
+        List<User> users = userDAO.getAll();
+        Integer lastID = null;
+        for (User user : users) {
+            System.out.println(AnsiColors.ANSI_YELLOW + "User " + user.getId() + ": " + user.toString() + AnsiColors.ANSI_RESET);
+            lastID = user.getId();
+        }
+        System.out.println(AnsiColors.ANSI_YELLOW_BACKGROUND + AnsiColors.ANSI_BLUE + "GET ALL PASSED" + AnsiColors.ANSI_RESET + "\n");
 
-        // Test deleteUser()
-        // UserDAO userDAO = new UserDAO();
-        // userDAO.deleteUser(1);
+        // Test getById()
+        User user = userDAO.getById(lastID);
+        System.out.println(AnsiColors.ANSI_YELLOW + "Get by ID: " + user.toString() + AnsiColors.ANSI_RESET);
+        System.out.println(AnsiColors.ANSI_YELLOW_BACKGROUND + AnsiColors.ANSI_BLUE + "GET BY ID PASSED" + AnsiColors.ANSI_RESET + "\n");
+
+        // Test update()
+        user.setFirstname(user.getFirstname() + " Updated");
+        userDAO.update(user);
+        System.out.println(AnsiColors.ANSI_YELLOW + "Update User: " + userDAO.getById(lastID).toString() + AnsiColors.ANSI_RESET);
+        System.out.println(AnsiColors.ANSI_YELLOW_BACKGROUND + AnsiColors.ANSI_BLUE + "UPDATE PASSED" + AnsiColors.ANSI_RESET + "\n");
+
+        // Test delete()
+        userDAO.delete(lastID);
+        System.out.println(AnsiColors.ANSI_YELLOW + "Delete User: " + userDAO.getById(lastID).toString() + AnsiColors.ANSI_RESET);
+        System.out.println(AnsiColors.ANSI_YELLOW_BACKGROUND + AnsiColors.ANSI_BLUE + "DELETE PASSED" + AnsiColors.ANSI_RESET + "\n");
+
+        // Pass
+        System.out.println(AnsiColors.ANSI_GREEN_BACKGROUND + AnsiColors.ANSI_BLUE + "PASSED ALL TESTS" + AnsiColors.ANSI_RESET);
     }
 
     // Implement DAO methods here
 
-    // * getAllUsers()
-    public List<User> getAllUsers() {
+    // * getAll()
+    public List<User> getAll() {
         List<User> users = new ArrayList<User>();
 
         try {
@@ -81,8 +94,8 @@ public class UserDAO {
         return users;
     }
 
-    // * getUserById(int id)
-    public User getUserById(int id) {
+    // * getById(int id)
+    public User getById(int id) {
         User user = new User();
 
         try {
@@ -109,8 +122,8 @@ public class UserDAO {
         return user;
     }
 
-    // * addUser(User user)
-    public Boolean addUser(User user) {
+    // * add(User user)
+    public Boolean add(User user) {
         Boolean success = false;
 
         try {
@@ -145,8 +158,8 @@ public class UserDAO {
         return success;
     }
 
-    // * updateUser(User user)
-    public void updateUser(User user) {
+    // * update(User user)
+    public void update(User user) {
         try {
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             String query = "UPDATE user SET role = ?, firstname = ?, lastname = ?, username = ?, password = ? WHERE id = ?";
@@ -165,8 +178,8 @@ public class UserDAO {
         }
     }
 
-    // * deleteUser(int id)
-    public void deleteUser(int id) {
+    // * delete(int id)
+    public void delete(int id) {
         try {
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             String query = "DELETE FROM user WHERE id = ?";

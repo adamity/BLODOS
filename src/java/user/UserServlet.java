@@ -26,7 +26,7 @@ public class UserServlet extends HttpServlet {
                 request.getSession().setAttribute("action", "user");
                 request.getSession().setAttribute("title", "User");
 
-                List<User> userList = userDAO.getAllUsers();
+                List<User> userList = userDAO.getAll();
                 request.setAttribute("userList", userList);
             } else {
                 alert = "?error=You must be logged in to view this page.";
@@ -39,11 +39,11 @@ public class UserServlet extends HttpServlet {
 
             if (pathParts.length == 2) {
                 // Get user by ID
-                User user = userDAO.getUserById(userId);
+                User user = userDAO.getById(userId);
                 request.setAttribute("user", user);
             } else if (pathParts.length == 3 && pathParts[2].equals("delete")) {
                 // Delete user by ID
-                userDAO.deleteUser(userId);
+                userDAO.delete(userId);
             }
         }
     }
@@ -56,16 +56,16 @@ public class UserServlet extends HttpServlet {
             // Add user
             User newUser = new User();
             newUser.setUsername(request.getParameter("username"));
-            userDAO.addUser(newUser);
+            userDAO.add(newUser);
         } else {
             String[] pathParts = action.split("/");
             int userId = Integer.parseInt(pathParts[1]);
 
             if (pathParts.length == 2) {
                 // Update user
-                User existingUser = userDAO.getUserById(userId);
+                User existingUser = userDAO.getById(userId);
                 existingUser.setUsername(request.getParameter("username"));
-                userDAO.updateUser(existingUser);
+                userDAO.update(existingUser);
             }
         }
     }

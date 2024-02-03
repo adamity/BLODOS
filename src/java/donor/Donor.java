@@ -18,7 +18,7 @@ public class Donor {
 
     protected int id;
     protected int user_id;
-    protected int referrer_donor_id;
+    protected Integer referrer_donor_id; // Updated to accept null value
     protected String ic_number;
     protected String fullname;
     protected String dob;
@@ -32,7 +32,7 @@ public class Donor {
 
     public Donor(
             int user_id,
-            int referrer_donor_id,
+            Integer referrer_donor_id, // Updated to accept null value
             String ic_number,
             String fullname,
             String dob,
@@ -54,7 +54,7 @@ public class Donor {
     public Donor(
             int id,
             int user_id,
-            int referrer_donor_id,
+            Integer referrer_donor_id, // Updated to accept null value
             String ic_number,
             String fullname,
             String dob,
@@ -83,7 +83,7 @@ public class Donor {
         return user_id;
     }
 
-    public int getReferrerDonorId() {
+    public Integer getReferrerDonorId() { // Updated to return Integer type
         return referrer_donor_id;
     }
 
@@ -124,7 +124,7 @@ public class Donor {
         this.user_id = user_id;
     }
 
-    public void setReferrerDonorId(int referrer_donor_id) {
+    public void setReferrerDonorId(Integer referrer_donor_id) { // Updated to accept Integer type
         this.referrer_donor_id = referrer_donor_id;
     }
 
