@@ -24,28 +24,30 @@
                         <th scope="col">Time</th>
                         <th scope="col">Quantity (ml)</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>009</td>
-                        <td>John Doe</td>
-                        <td>17/10/2022</td>
-                        <td>09:30</td>
-                        <td>470</td>
-                        <td>Completed</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationModal" onclick="upsertInit('009')">Edit</button>
-                            <% if (role != null && role.equals("admin")) { %>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#deleteDonationModal" onclick="deleteInit('009')">
-                                Delete
-                            </button>
-                            <% } %>
-                        </td>
-                    </tr>
+                    <c:forEach var="donation" items="${donationList}" varStatus="num">
+                        <tr>
+                            <th scope="row">${num.index + 1}</th>
+                            <td>${donation.getId()}</td>
+                            <td>${donation.getDonor().getFullname()}</td>
+                            <td>${donation.getDate()}</td>
+                            <td>${donation.getTime()}</td>
+                            <td>${donation.getQuantity()}</td>
+                            <td>${donation.getStatus()}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationModal" onclick="upsertInit('${donation.getId()}')">Edit</button>
+                                <% if (role != null && role.equals("admin")) { %>
+                                <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#deleteDonationModal" onclick="deleteInit('${donation.getId()}')">
+                                    Delete
+                                </button>
+                                <% } %>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

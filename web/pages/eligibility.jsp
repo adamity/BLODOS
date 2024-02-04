@@ -25,29 +25,31 @@
                         <th scope="col">Medical Illness</th>
                         <th scope="col">High Risk Activity</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>100</td>
-                        <td>John Doe</td>
-                        <td>8</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                        <td>No</td>
-                        <td>Eligible</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertEligibilityModal" onclick="upsertInit('100')">Edit</button>
-                            <% if (role != null && role.equals("admin")) { %>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#deleteEligibilityModal" onclick="deleteInit('100')">
-                                Delete
-                            </button>
-                            <% } %>
-                        </td>
-                    </tr>
+                    <c:forEach var="eligibility" items="${eligibilityList}" varStatus="num">
+                        <tr>
+                            <th scope="row">${num.index + 1}</th>
+                            <td>${eligibility.getId()}</td>
+                            <td>${eligibility.getDonor().getFullname()}</td>
+                            <td>${eligibility.getSleepHours()}</td>
+                            <td>${eligibility.getMealBeforeDonation()}</td>
+                            <td>${eligibility.getMedicalIllness()}</td>
+                            <td>${eligibility.getHighRiskActivity()}</td>
+                            <td>${eligibility.getStatus()}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertEligibilityModal" onclick="upsertInit('${eligibility.getId()}')">Edit</button>
+                                <% if (role != null && role.equals("admin")) { %>
+                                <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#deleteEligibilityModal" onclick="deleteInit('${eligibility.getId()}')">
+                                    Delete
+                                </button>
+                                <% } %>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
