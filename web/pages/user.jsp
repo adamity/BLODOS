@@ -43,6 +43,9 @@
                                     Delete
                                 </button>
                                 <% } %>
+
+                                <!-- Test Delete -->
+                                <!-- <a href="users/${user.getId()}/delete" class="btn btn-sm btn-link text-capitalize p-0 mx-1">Delete</a> -->
                             </td>
                         </tr>
                     </c:forEach>
