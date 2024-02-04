@@ -8,9 +8,33 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "UserServlet", urlPatterns = { "/users" })
+@WebServlet(name = "UserServlet", urlPatterns = { "/users/*" })
 public class UserServlet extends HttpServlet {
     private UserDAO userDAO = new UserDAO();
+
+    /**
+     * Endpoints Structure:
+     * 
+     * GET /users
+     * - Get all users
+     * - Redirect to index.jsp
+     * 
+     * GET /users/{id}
+     * - Get user by ID
+     * - Return JSON
+     * 
+     * GET /users/{id}/delete
+     * - Delete user by ID
+     * - Redirect to GET /users
+     * 
+     * POST /users/
+     * - Add user
+     * - Redirect to GET /users
+     * 
+     * POST /users/{id}
+     * - Update user by ID
+     * - Redirect to GET /users
+     */
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,16 +55,18 @@ public class UserServlet extends HttpServlet {
 
             request.getRequestDispatcher("index.jsp" + alert).forward(request, response);
         } else {
+            // This section will be requested by AJAX, so we don't need to forward to a JSP page but instead return JSON
             String[] pathParts = action.split("/");
             int userId = Integer.parseInt(pathParts[1]);
 
             if (pathParts.length == 2) {
                 // Get user by ID
                 User user = userDAO.getById(userId);
-                request.setAttribute("user", user);
+                response.getWriter().print(user.toJSON());
             } else if (pathParts.length == 3 && pathParts[2].equals("delete")) {
                 // Delete user by ID
                 userDAO.delete(userId);
+                response.sendRedirect(request.getContextPath() + "/users");
             }
         }
     }
@@ -51,9 +77,16 @@ public class UserServlet extends HttpServlet {
 
         if (action == null || action.equals("/")) {
             // Add user
-            User newUser = new User();
-            newUser.setUsername(request.getParameter("username"));
+            User newUser = new User(
+                request.getParameter("role"),
+                request.getParameter("firstname"),
+                request.getParameter("lastname"),
+                request.getParameter("username"),
+                request.getParameter("password")
+            );
+
             userDAO.add(newUser);
+            response.sendRedirect(request.getContextPath() + "/users");
         } else {
             String[] pathParts = action.split("/");
             int userId = Integer.parseInt(pathParts[1]);
@@ -61,14 +94,20 @@ public class UserServlet extends HttpServlet {
             if (pathParts.length == 2) {
                 // Update user
                 User existingUser = userDAO.getById(userId);
+                existingUser.setRole(request.getParameter("role"));
+                existingUser.setFirstname(request.getParameter("firstname"));
+                existingUser.setLastname(request.getParameter("lastname"));
                 existingUser.setUsername(request.getParameter("username"));
+                existingUser.setPassword(request.getParameter("password"));
+
                 userDAO.update(existingUser);
+                response.sendRedirect(request.getContextPath() + "/users");
             }
         }
     }
 
     @Override
     public String getServletInfo() {
-        return "User Servlet: handles user-related requests";
+        return "User Servlet: handles CRUD operations for users";
     }
 }
