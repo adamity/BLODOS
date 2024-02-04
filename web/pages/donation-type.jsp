@@ -50,24 +50,28 @@
 
 <div class="modal fade" id="upsertDonationTypeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="upsertDonationTypeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="upsertDonationTypeModalLabel"></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+        <form action="donation-type" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="upsertDonationTypeModalLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-            <div class="modal-body">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Whole Blood" required>
-            </div>
+                <div class="modal-body">
+                    <!-- request.getParameter("type_name") -->
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-primary shadow-0 text-capitalize">
-                    <i class="bi bi-upload me-2"></i>
-                    Submit
-                </button>
+                    <label for="type_name" class="form-label">Name<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="type_name" name="type_name" placeholder="e.g. Whole Blood" required>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-primary shadow-0 text-capitalize">
+                        <i class="bi bi-upload me-2"></i>
+                        Submit
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
