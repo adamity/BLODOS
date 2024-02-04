@@ -1,87 +1,116 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package eligibility;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author zul
- */
-@WebServlet(name = "EligibilityServlet", urlPatterns = {"/EligibilityServlet"})
+@WebServlet(name = "EligibilityServlet", urlPatterns = {"/eligibility/*"})
 public class EligibilityServlet extends HttpServlet {
+    private EligibilityDAO eligibilityDAO = new EligibilityDAO();
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * Endpoints Structure:
+     * 
+     * GET /eligibility
+     * - Get all eligibility
+     * - Redirect to index.jsp
+     * 
+     * GET /eligibility/{id}
+     * - Get eligibility by ID
+     * - Return JSON
+     * 
+     * GET /eligibility/{id}/delete
+     * - Delete eligibility by ID
+     * - Redirect to GET /eligibility
+     * 
+     * POST /eligibility/
+     * - Add eligibility
+     * - Redirect to GET /eligibility
+     * 
+     * POST /eligibility/{id}
+     * - Update eligibility by ID
+     * - Redirect to GET /eligibility
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EligibilityServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EligibilityServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getPathInfo();
+        String alert = "";
+
+        if (action == null || action.equals("/")) {
+            // Get all eligibility
+            if (request.getSession() != null && request.getSession().getAttribute("token") != null) {
+                request.getSession().setAttribute("action", "eligibility");
+                request.getSession().setAttribute("title", "Eligibility");
+
+                List<Eligibility> eligibilityList = eligibilityDAO.getAll();
+                request.setAttribute("eligibilityList", eligibilityList);
+            } else {
+                alert = "?error=You must be logged in to view this page.";
+            }
+
+            request.getRequestDispatcher("index.jsp" + alert).forward(request, response);
+        } else {
+            // This section will be requested by AJAX, so we don't need to forward to a JSP page but instead return JSON
+            String[] pathParts = action.split("/");
+            int eligibilityId = Integer.parseInt(pathParts[1]);
+
+            if (pathParts.length == 2) {
+                // Get eligibility by ID
+                Eligibility eligibility = eligibilityDAO.getById(eligibilityId);
+                response.setContentType("application/json");
+                response.getWriter().print(eligibility.toJSON());
+            } else if (pathParts.length == 3 && pathParts[2].equals("delete")) {
+                // Delete eligibility by ID
+                eligibilityDAO.delete(eligibilityId);
+                response.sendRedirect(request.getContextPath() + "/eligibility");
+            }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getPathInfo();
+
+        if (action == null || action.equals("/")) {
+            // Add eligibility
+            Eligibility eligibility = new Eligibility(
+                Integer.parseInt(request.getParameter("donor_id")),
+                Integer.parseInt(request.getParameter("sleep_hours")),
+                Integer.parseInt(request.getParameter("meal_before_donation")),
+                Integer.parseInt(request.getParameter("medical_illness")),
+                Integer.parseInt(request.getParameter("high_risk_activity"))
+            );
+
+            eligibilityDAO.add(eligibility);
+            response.sendRedirect(request.getContextPath() + "/eligibility");
+        } else {
+            String[] pathParts = action.split("/");
+            int eligibilityId = Integer.parseInt(pathParts[1]);
+
+            if (pathParts.length == 2) {
+                // Update eligibility by ID
+                Eligibility eligibility = new Eligibility(
+                    eligibilityId,
+                    Integer.parseInt(request.getParameter("donor_id")),
+                    Integer.parseInt(request.getParameter("sleep_hours")),
+                    Integer.parseInt(request.getParameter("meal_before_donation")),
+                    Integer.parseInt(request.getParameter("medical_illness")),
+                    Integer.parseInt(request.getParameter("high_risk_activity"))
+                );
+
+                eligibilityDAO.update(eligibility);
+                response.sendRedirect(request.getContextPath() + "/eligibility");
+            }
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Eligibility Servlet: handles CRUD operations for eligibility";
+    }
 }

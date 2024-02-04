@@ -62,6 +62,7 @@ public class UserServlet extends HttpServlet {
             if (pathParts.length == 2) {
                 // Get user by ID
                 User user = userDAO.getById(userId);
+                response.setContentType("application/json");
                 response.getWriter().print(user.toJSON());
             } else if (pathParts.length == 3 && pathParts[2].equals("delete")) {
                 // Delete user by ID
@@ -93,14 +94,16 @@ public class UserServlet extends HttpServlet {
 
             if (pathParts.length == 2) {
                 // Update user
-                User existingUser = userDAO.getById(userId);
-                existingUser.setRole(request.getParameter("role"));
-                existingUser.setFirstname(request.getParameter("firstname"));
-                existingUser.setLastname(request.getParameter("lastname"));
-                existingUser.setUsername(request.getParameter("username"));
-                existingUser.setPassword(request.getParameter("password"));
+                User user = new User(
+                    userId,
+                    request.getParameter("role"),
+                    request.getParameter("firstname"),
+                    request.getParameter("lastname"),
+                    request.getParameter("username"),
+                    request.getParameter("password")
+                );
 
-                userDAO.update(existingUser);
+                userDAO.update(user);
                 response.sendRedirect(request.getContextPath() + "/users");
             }
         }

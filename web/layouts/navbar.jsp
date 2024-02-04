@@ -24,11 +24,11 @@
                 <i class="bi bi-people me-2"></i>Donor
             </a>
 
-            <a href="RouteServlet?action=eligibility" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
+            <a href="eligibility" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
                 <i class="bi bi-person-check me-2"></i>Eligibility
             </a>
 
-            <a href="RouteServlet?action=donation" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
+            <a href="donation" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
                 <i class="bi bi-journal-medical me-2"></i>Donation
             </a>
 
@@ -43,7 +43,7 @@
                 </button>
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="RouteServlet?action=donation-type">Donation Type</a></li>
+                    <li><a class="dropdown-item" href="donation-type">Donation Type</a></li>
                     <li><a class="dropdown-item" href="users">User</a></li>
                 </ul>
             </div>

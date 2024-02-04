@@ -1,87 +1,119 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package donation;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author zul
- */
-@WebServlet(name = "DonationServlet", urlPatterns = {"/DonationServlet"})
+@WebServlet(name = "DonationServlet", urlPatterns = {"/donation/*"})
 public class DonationServlet extends HttpServlet {
+    private DonationDAO donationDAO = new DonationDAO();
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * Endpoints Structure:
+     * 
+     * GET /donation
+     * - Get all donation
+     * - Redirect to index.jsp
+     * 
+     * GET /donation/{id}
+     * - Get donation by ID
+     * - Return JSON
+     * 
+     * GET /donation/{id}/delete
+     * - Delete donation by ID
+     * - Redirect to GET /donation
+     * 
+     * POST /donation/
+     * - Add donation
+     * - Redirect to GET /donation
+     * 
+     * POST /donation/{id}
+     * - Update donation by ID
+     * - Redirect to GET /donation
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DonationServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DonationServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getPathInfo();
+        String alert = "";
+
+        if (action == null || action.equals("/")) {
+            // Get all donation
+            if (request.getSession() != null && request.getSession().getAttribute("token") != null) {
+                request.getSession().setAttribute("action", "donation");
+                request.getSession().setAttribute("title", "Donation");
+
+                List<Donation> donationList = donationDAO.getAll();
+                request.setAttribute("donationList", donationList);
+            } else {
+                alert = "?error=You must be logged in to view this page.";
+            }
+
+            request.getRequestDispatcher("index.jsp" + alert).forward(request, response);
+        } else {
+            // This section will be requested by AJAX, so we don't need to forward to a JSP page but instead return JSON
+            String[] pathParts = action.split("/");
+            int donationId = Integer.parseInt(pathParts[1]);
+
+            if (pathParts.length == 2) {
+                // Get donation by ID
+                Donation donation = donationDAO.getById(donationId);
+                response.setContentType("application/json");
+                response.getWriter().print(donation.toJSON());
+            } else if (pathParts.length == 3 && pathParts[2].equals("delete")) {
+                // Delete donation by ID
+                donationDAO.delete(donationId);
+                response.sendRedirect(request.getContextPath() + "/donation");
+            }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getPathInfo();
+
+        if (action == null || action.equals("/")) {
+            // Add donation
+            Donation donation = new Donation(
+                Integer.parseInt(request.getParameter("donor_id")),
+                Integer.parseInt(request.getParameter("user_id")),
+                request.getParameter("date"),
+                request.getParameter("time"),
+                Integer.parseInt(request.getParameter("quantity")),
+                request.getParameter("status")
+            );
+
+            donationDAO.add(donation);
+            response.sendRedirect(request.getContextPath() + "/donation");
+        } else {
+            // Update donation by ID
+            String[] pathParts = action.split("/");
+            int donationId = Integer.parseInt(pathParts[1]);
+
+            if (pathParts.length == 2) {
+                // Update donation by ID
+                Donation donation = new Donation(
+                    donationId,
+                    Integer.parseInt(request.getParameter("donor_id")),
+                    Integer.parseInt(request.getParameter("user_id")),
+                    request.getParameter("date"),
+                    request.getParameter("time"),
+                    Integer.parseInt(request.getParameter("quantity")),
+                    request.getParameter("status")
+                );
+
+                donationDAO.update(donation);
+                response.sendRedirect(request.getContextPath() + "/donation");
+            }
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Donation Servlet: handles CRUD operations for donation";
+    }
 }
