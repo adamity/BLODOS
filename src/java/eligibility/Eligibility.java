@@ -1,5 +1,7 @@
 package eligibility;
 
+import donor.*;
+
 public class Eligibility {
     // Eligibility class represents a user in the database
     // - id
@@ -98,6 +100,12 @@ public class Eligibility {
 
     public void setHighRiskActivity(int high_risk_activity) {
         this.high_risk_activity = high_risk_activity;
+    }
+
+    // Relationship
+    public Donor getDonor() {
+        DonorDAO donorDAO = new DonorDAO();
+        return donorDAO.getById(donor_id);
     }
 
     // toString() method

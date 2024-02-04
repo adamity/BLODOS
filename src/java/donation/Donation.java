@@ -1,5 +1,8 @@
 package donation;
 
+import donor.*;
+import user.*;
+
 public class Donation {
     // Donation class represents a user in the database
     // - id
@@ -99,6 +102,17 @@ public class Donation {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    // Relationship
+    public Donor getDonor() {
+        DonorDAO donorDAO = new DonorDAO();
+        return donorDAO.getById(donor_id);
+    }
+
+    public User getStaffUser() {
+        UserDAO userDAO = new UserDAO();
+        return userDAO.getById(user_id);
     }
 
     // toString() method

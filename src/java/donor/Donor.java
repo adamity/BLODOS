@@ -1,5 +1,7 @@
 package donor;
 
+import user.*;
+
 public class Donor {
     // Donor class represents a user in the database
     // - id
@@ -154,6 +156,21 @@ public class Donor {
 
     public void setBloodType(String blood_type) {
         this.blood_type = blood_type;
+    }
+
+    // Relationship
+    public User getStaffUser() {
+        UserDAO userDAO = new UserDAO();
+        return userDAO.getById(user_id);
+    }
+
+    public Donor getReferrerDonor() {
+        if (referrer_donor_id != null) {
+            DonorDAO donorDAO = new DonorDAO();
+            return donorDAO.getById(referrer_donor_id);
+        } else {
+            return null;
+        }
     }
 
     // toString() method
