@@ -149,10 +149,10 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-danger shadow-0 text-capitalize" data-bs-dismiss="modal">
+                <a id="deleteDonationBtn" href="#" class="btn btn-sm btn-danger shadow-0 text-capitalize">
                     <i class="bi bi-trash me-2"></i>
                     Delete
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -170,5 +170,6 @@
 
     function deleteInit(id) {
         document.getElementById('donationID').innerHTML = id;
+        document.getElementById('deleteDonationBtn').href = 'donation/' + id + '/delete';
     }
 </script>
