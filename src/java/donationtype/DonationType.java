@@ -1,5 +1,7 @@
 package donationtype;
 
+import donation.*;
+
 public class DonationType {
     // DonationType class represents a user in the database
     // - id
@@ -39,6 +41,12 @@ public class DonationType {
 
     public void setTypeName(String type_name) {
         this.type_name = type_name;
+    }
+
+    // Other methods
+    public int getTotalDonation() {
+        // TODO: Implement this method
+        return 0;
     }
 
     // toString() method

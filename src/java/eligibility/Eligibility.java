@@ -108,6 +108,21 @@ public class Eligibility {
         return donorDAO.getById(donor_id);
     }
 
+    // Other methods
+    public String getStatus() {
+        if (sleep_hours < 8) {
+            return "Not Eligible";
+        } else if (meal_before_donation < 1) {
+            return "Not Eligible";
+        } else if (medical_illness == 1) {
+            return "Not Eligible";
+        } else if (high_risk_activity == 1) {
+            return "Not Eligible";
+        } else {
+            return "Eligible";
+        }
+    }
+
     // toString() method
     @Override
     public String toString() {
