@@ -158,6 +158,17 @@ public class Donor {
         this.blood_type = blood_type;
     }
 
+    // Other methods
+    public int getTotalDonation() {
+        // TODO: Implement this method
+        return 0;
+    }
+
+    public int getTotalEligibility() {
+        // TODO: Implement this method
+        return 0;
+    }
+
     // Relationship
     public User getStaffUser() {
         UserDAO userDAO = new UserDAO();

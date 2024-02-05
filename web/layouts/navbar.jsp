@@ -20,7 +20,7 @@
                 <i class="bi bi-house me-2"></i>Dashboard
             </a>
 
-            <a href="RouteServlet?action=donor" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
+            <a href="donor" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
                 <i class="bi bi-people me-2"></i>Donor
             </a>
 

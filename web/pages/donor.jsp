@@ -26,30 +26,32 @@
                         <th scope="col">Blood Type</th>
                         <th scope="col">Total Eligibility</th>
                         <th scope="col">Total Donation</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>100</td>
-                        <td>171099-12-1233</td>
-                        <td>John Doe</td>
-                        <td>17/10/1999</td>
-                        <td>Male</td>
-                        <td>B</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonorModal" onclick="upsertInit('100')">Edit</button>
-                            <% if (role != null && role.equals("admin")) { %>
-                            <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#deleteDonorModal" onclick="deleteInit('100')">
-                                Delete
-                            </button>
-                            <% } %>
-                        </td>
-                    </tr>
+                    <c:forEach var="donor" items="${donorList}" varStatus="num">
+                        <tr>
+                            <th scope="row">${num.index + 1}</th>
+                            <td>${donor.getId()}</td>
+                            <td>${donor.getIcNumber()}</td>
+                            <td>${donor.getFullname()}</td>
+                            <td>${donor.getDob()}</td>
+                            <td>${donor.getGender()}</td>
+                            <td>${donor.getBloodType()}</td>
+                            <td>${donor.getTotalEligibility()}</td>
+                            <td>${donor.getTotalDonation()}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonorModal" onclick="upsertInit('${donor.getId()}')">Edit</button>
+                                <% if (role != null && role.equals("admin")) { %>
+                                <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#deleteDonorModal" onclick="deleteInit('${donor.getId()}')">
+                                    Delete
+                                </button>
+                                <% } %>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -178,10 +180,10 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-danger shadow-0 text-capitalize" data-bs-dismiss="modal">
+                <a id="deleteDonorBtn" href="#" class="btn btn-sm btn-danger shadow-0 text-capitalize">
                     <i class="bi bi-trash me-2"></i>
                     Delete
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -199,5 +201,6 @@
 
     function deleteInit(id) {
         document.getElementById('donorID').innerHTML = id;
+        document.getElementById('deleteDonorBtn').href = 'donor/' + id + '/delete';
     }
 </script>
