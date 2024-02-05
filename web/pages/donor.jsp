@@ -60,110 +60,121 @@
 
 <div class="modal fade" id="upsertDonorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="upsertDonorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="upsertDonorModalLabel"></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+        <form id="upsertDonorForm" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="upsertDonorModalLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-            <div class="modal-body">
-                <!--
-                IC Number
-                Fullname
-                Date of Birth
-                Gender
-                Weight
-                Height
-                Blood Type
-                -->
+                <div class="modal-body">
+                    <!--
+                    IC Number
+                    Fullname
+                    Date of Birth
+                    Gender
+                    Weight
+                    Height
+                    Blood Type
+                    -->
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <label for="referrer_donor_id" class="form-label">Referrer Donor</label>
-                            <select class="form-select" id="referrer_donor_id" name="referrer_donor_id"></select>
+                    <!-- Integer.parseInt(request.getParameter("referrer_donor_id")),
+                    request.getParameter("ic_number"),
+                    request.getParameter("fullname"),
+                    request.getParameter("dob"),
+                    request.getParameter("gender"),
+                    Integer.parseInt(request.getParameter("weight")),
+                    Integer.parseInt(request.getParameter("height")),
+                    request.getParameter("blood_type") -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="referrer_donor_id" class="form-label">Referrer Donor</label>
+                                <select class="form-select" id="referrer_donor_id" name="referrer_donor_id"></select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-lg-6">
-                        <div class="mb-3">
-                            <label for="icNumber" class="form-label">IC Number</label>
-                            <input type="text" class="form-control" id="icNumber" name="icNumber" placeholder="e.g. 123456-12-1234" required>
+                        <div class="col-12 col-lg-6">
+                            <div class="mb-3">
+                                <label for="ic_number" class="form-label">IC Number</label>
+                                <input type="text" class="form-control" id="ic_number" name="ic_number" placeholder="e.g. 123456-12-1234" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-lg-6">
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Fullname</label>
-                            <input type="text" class="form-control" id="fullname" name="fullname" placeholder="e.g. John Doe" required>
+                        <div class="col-12 col-lg-6">
+                            <div class="mb-3">
+                                <label for="fullname" class="form-label">Fullname</label>
+                                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="e.g. John Doe" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-lg-6">
-                        <div class="mb-3">
-                            <label for="dateOfBirth" class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
+                        <div class="col-12 col-lg-6">
+                            <div class="mb-3">
+                                <label for="dob" class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" id="dob" name="dob" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-lg-6">
-                        <div class="mb-3">
-                            <label for="gender" class="form-label">Gender</label>
+                        <div class="col-12 col-lg-6">
+                            <div class="mb-3">
+                                <label for="gender" class="form-label">Gender</label>
 
-                            <div class="d-flex">
-                                <div class="form-check me-3">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" required>
-                                    <label class="form-check-label" for="genderMale">Male</label>
-                                </div>
+                                <div class="d-flex">
+                                    <div class="form-check me-3">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" required>
+                                        <label class="form-check-label" for="genderMale">Male</label>
+                                    </div>
 
-                                <div class="form-check me-3">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
-                                    <label class="form-check-label" for="genderFemale">Female</label>
+                                    <div class="form-check me-3">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female">
+                                        <label class="form-check-label" for="genderFemale">Female</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-lg-6">
-                        <div class="mb-3">
-                            <label for="weight" class="form-label">Weight (kg)</label>
-                            <input type="number" class="form-control" id="weight" name="weight" min="0" placeholder="e.g. 70" required>
+                        <div class="col-12 col-lg-6">
+                            <div class="mb-3">
+                                <label for="weight" class="form-label">Weight (kg)</label>
+                                <input type="number" class="form-control" id="weight" name="weight" min="0" placeholder="e.g. 70" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-lg-6">
-                        <div class="mb-3">
-                            <label for="height" class="form-label">Height (cm)</label>
-                            <input type="number" class="form-control" id="height" name="height" min="0" placeholder="e.g. 170" required>
+                        <div class="col-12 col-lg-6">
+                            <div class="mb-3">
+                                <label for="height" class="form-label">Height (cm)</label>
+                                <input type="number" class="form-control" id="height" name="height" min="0" placeholder="e.g. 170" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-lg-6">
-                        <div class="mb-3">
-                            <label for="bloodType" class="form-label">Blood Type</label>
-                            <select class="form-select" id="bloodType" name="bloodType" required>
-                                <option value="" selected disabled hidden>Select Blood Type</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
-                            </select>
+                        <div class="col-12 col-lg-6">
+                            <div class="mb-3">
+                                <label for="blood_type" class="form-label">Blood Type</label>
+                                <select class="form-select" id="blood_type" name="blood_type" required>
+                                    <option value="" selected disabled hidden>Select Blood Type</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-primary shadow-0 text-capitalize">
-                    <i class="bi bi-upload me-2"></i>
-                    Submit
-                </button>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-primary shadow-0 text-capitalize">
+                        <i class="bi bi-upload me-2"></i>
+                        Submit
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -203,14 +214,41 @@
     function upsertInit(id = null) {
         if (id) {
             document.getElementById('upsertDonorModalLabel').innerHTML = 'Edit Donor';
+            document.getElementById('upsertDonorForm').action = 'donor/' + id;
+            getDonorById(id);
         } else {
             document.getElementById('upsertDonorModalLabel').innerHTML = 'Create New Donor';
+            document.getElementById('upsertDonorForm').action = 'donor';
+
+            // Empty value
+            document.getElementById('referrer_donor_id').value = '';
+            document.getElementById('ic_number').value = '';
+            document.getElementById('fullname').value = '';
+            document.getElementById('dob').value = '';
+            document.getElementById('genderMale').checked = true;
+            document.getElementById('weight').value = '';
+            document.getElementById('height').value = '';
+            document.getElementById('blood_type').value = '';
         }
     }
 
     function deleteInit(id) {
         document.getElementById('donorID').innerHTML = id;
         document.getElementById('deleteDonorBtn').href = 'donor/' + id + '/delete';
+    }
+
+    function getDonorById(id) {
+        fetch('donor/' + id).then(response => response.json()).then(data => {
+            // Set value
+            document.getElementById('referrer_donor_id').value = data.referrer_donor_id;
+            document.getElementById('ic_number').value = data.ic_number;
+            document.getElementById('fullname').value = data.fullname;
+            document.getElementById('dob').value = data.dob;
+            document.getElementById('gender' + data.gender).checked = true;
+            document.getElementById('weight').value = data.weight;
+            document.getElementById('height').value = data.height;
+            document.getElementById('blood_type').value = data.blood_type;
+        });
     }
 
     function getDonorList() {

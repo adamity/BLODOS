@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import utility.*;
 
 @WebServlet(name = "DonorServlet", urlPatterns = {"/donor/*"})
 public class DonorServlet extends HttpServlet {
@@ -81,34 +82,17 @@ public class DonorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getPathInfo();
+        try {
+            String action = request.getPathInfo();
+            String token = (String) request.getSession().getAttribute("token");
+            int userId = Integer.parseInt(Encryptor.decrypt(token));
 
-        if (action == null || action.equals("/")) {
-            // Add donor
-            Donor donor = new Donor(
-                Integer.parseInt(request.getParameter("user_id")),
-                Integer.parseInt(request.getParameter("referrer_donor_id")),
-                request.getParameter("ic_number"),
-                request.getParameter("fullname"),
-                request.getParameter("dob"),
-                request.getParameter("gender"),
-                Integer.parseInt(request.getParameter("weight")),
-                Integer.parseInt(request.getParameter("height")),
-                request.getParameter("blood_type")
-            );
-
-            donorDAO.add(donor);
-            response.sendRedirect(request.getContextPath() + "/donor");
-        } else {
-            String[] pathParts = action.split("/");
-            int donorId = Integer.parseInt(pathParts[1]);
-
-            if (pathParts.length == 2) {
-                // Update donor by ID
+            if (action == null || action.equals("/")) {
+                // Add donor
+                String referrerDonorId = request.getParameter("referrer_donor_id");
                 Donor donor = new Donor(
-                    donorId,
-                    Integer.parseInt(request.getParameter("user_id")),
-                    Integer.parseInt(request.getParameter("referrer_donor_id")),
+                    userId,
+                    referrerDonorId == null || referrerDonorId.isEmpty() ? null : Integer.parseInt(referrerDonorId),
                     request.getParameter("ic_number"),
                     request.getParameter("fullname"),
                     request.getParameter("dob"),
@@ -118,9 +102,34 @@ public class DonorServlet extends HttpServlet {
                     request.getParameter("blood_type")
                 );
 
-                donorDAO.update(donor);
+                donorDAO.add(donor);
                 response.sendRedirect(request.getContextPath() + "/donor");
+            } else {
+                String[] pathParts = action.split("/");
+                int donorId = Integer.parseInt(pathParts[1]);
+
+                if (pathParts.length == 2) {
+                    // Update donor by ID
+                    String referrerDonorId = request.getParameter("referrer_donor_id");
+                    Donor donor = new Donor(
+                        donorId,
+                        userId,
+                        referrerDonorId == null || referrerDonorId.isEmpty() ? null : Integer.parseInt(referrerDonorId),
+                        request.getParameter("ic_number"),
+                        request.getParameter("fullname"),
+                        request.getParameter("dob"),
+                        request.getParameter("gender"),
+                        Integer.parseInt(request.getParameter("weight")),
+                        Integer.parseInt(request.getParameter("height")),
+                        request.getParameter("blood_type")
+                    );
+
+                    donorDAO.update(donor);
+                    response.sendRedirect(request.getContextPath() + "/donor");
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
