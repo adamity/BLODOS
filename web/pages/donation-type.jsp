@@ -114,6 +114,9 @@
         } else {
             document.getElementById('upsertDonationTypeModalLabel').innerHTML = 'Create New Donation Type';
             document.getElementById('upsertDonationTypeForm').action = 'donation-type';
+
+            // Empty value
+            document.getElementById('type_name').value = '';
         }
     }
 

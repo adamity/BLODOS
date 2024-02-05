@@ -173,6 +173,13 @@
         } else {
             document.getElementById('upsertUserModalLabel').innerHTML = 'Create New User';
             document.getElementById('upsertUserForm').action = 'users';
+
+            // Empty value
+            document.getElementById('role').value = '';
+            document.getElementById('firstname').value = '';
+            document.getElementById('lastname').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
         }
     }
 

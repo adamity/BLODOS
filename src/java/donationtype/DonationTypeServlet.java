@@ -23,6 +23,10 @@ public class DonationTypeServlet extends HttpServlet {
      * - Get donation type by ID
      * - Return JSON
      * 
+     * GET /donation-type/list
+     * - Get all donation type
+     * - Return JSON
+     * 
      * GET /donation-type/{id}/delete
      * - Delete donation type by ID
      * - Redirect to GET /donation-type
@@ -57,16 +61,19 @@ public class DonationTypeServlet extends HttpServlet {
         } else {
             // This section will be requested by AJAX, so we don't need to forward to a JSP page but instead return JSON
             String[] pathParts = action.split("/");
-            int donationTypeId = Integer.parseInt(pathParts[1]);
 
-            if (pathParts.length == 2) {
+            if (pathParts.length == 2 && pathParts[1].equals("list")) {
+                List<DonationType> donationTypeList = donationTypeDAO.getAll();
+                response.setContentType("application/json");
+                response.getWriter().print(DonationType.toJSONArray(donationTypeList));
+            } else if (pathParts.length == 2) {
                 // Get donation type by ID
-                DonationType donationType = donationTypeDAO.getById(donationTypeId);
+                DonationType donationType = donationTypeDAO.getById(Integer.parseInt(pathParts[1]));
                 response.setContentType("application/json");
                 response.getWriter().print(donationType.toJSON());
             } else if (pathParts.length == 3 && pathParts[2].equals("delete")) {
                 // Delete donation type by ID
-                donationTypeDAO.delete(donationTypeId);
+                donationTypeDAO.delete(Integer.parseInt(pathParts[1]));
                 response.sendRedirect(request.getContextPath() + "/donation-type");
             }
         }

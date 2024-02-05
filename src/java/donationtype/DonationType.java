@@ -1,6 +1,6 @@
 package donationtype;
 
-import donation.*;
+import java.util.List;
 
 public class DonationType {
     // DonationType class represents a user in the database
@@ -61,5 +61,17 @@ public class DonationType {
     // toJSON() method
     public String toJSON() {
         return "{\"id\":" + id + ",\"type_name\":\"" + type_name + "\"}";
+    }
+
+    public static String toJSONArray(List<DonationType> donationTypeList) {
+        StringBuilder jsonArray = new StringBuilder("[");
+        for (int i = 0; i < donationTypeList.size(); i++) {
+            jsonArray.append(donationTypeList.get(i).toJSON());
+            if (i < donationTypeList.size() - 1) {
+                jsonArray.append(",");
+            }
+        }
+        jsonArray.append("]");
+        return jsonArray.toString();
     }
 }

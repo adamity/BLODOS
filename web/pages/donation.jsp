@@ -84,12 +84,14 @@
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="donor_id" class="form-label">Donor<span class="text-danger">*</span></label>
-                                <!-- TODO: Get list of donor from backend -->
-                                <select class="form-select" id="donor_id" name="donor_id" required>
-                                    <option value="" selected disabled hidden>Select Donor</option>
-                                    <option value="100">100 - John Doe</option>
-                                    <option value="101">101 - Jane Doe</option>
-                                </select>
+                                <select class="form-select" id="donor_id" name="donor_id" required></select>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="donation_type_id" class="form-label">Donation Type<span class="text-danger">*</span></label>
+                                <select class="form-select" id="donation_type_id" name="donation_type_id" required></select>
                             </div>
                         </div>
 
@@ -170,6 +172,9 @@
 <% } %>
 
 <script>
+    getDonorList();
+    getDonationTypeList();
+
     function upsertInit(id = null) {
         if (id) {
             document.getElementById('upsertDonationModalLabel').innerHTML = 'Edit Donation';
@@ -181,5 +186,23 @@
     function deleteInit(id) {
         document.getElementById('donationID').innerHTML = id;
         document.getElementById('deleteDonationBtn').href = 'donation/' + id + '/delete';
+    }
+
+    function getDonorList() {
+        document.getElementById('donor_id').innerHTML = '<option value="" selected disabled hidden>Select Donor</option>';
+        fetch('donor/list').then(response => response.json()).then(data => {
+            data.forEach(donor => {
+                document.getElementById('donor_id').innerHTML += "<option value='" + donor.id + "'>" + donor.id + " - " + donor.fullname + "</option>";
+            });
+        });
+    }
+
+    function getDonationTypeList() {
+        document.getElementById('donation_type_id').innerHTML = '<option value="" selected disabled hidden>Select Donation Type</option>';
+        fetch('donation-type/list').then(response => response.json()).then(data => {
+            data.forEach(donationType => {
+                document.getElementById('donation_type_id').innerHTML += "<option value='" + donationType.id + "'>" + donationType.id + " - " + donationType.type_name + "</option>";
+            });
+        });
     }
 </script>

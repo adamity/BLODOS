@@ -78,6 +78,13 @@
                 -->
 
                 <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="referrer_donor_id" class="form-label">Referrer Donor</label>
+                            <select class="form-select" id="referrer_donor_id" name="referrer_donor_id"></select>
+                        </div>
+                    </div>
+
                     <div class="col-12 col-lg-6">
                         <div class="mb-3">
                             <label for="icNumber" class="form-label">IC Number</label>
@@ -191,6 +198,8 @@
 <% } %>
 
 <script>
+    getDonorList();
+
     function upsertInit(id = null) {
         if (id) {
             document.getElementById('upsertDonorModalLabel').innerHTML = 'Edit Donor';
@@ -202,5 +211,14 @@
     function deleteInit(id) {
         document.getElementById('donorID').innerHTML = id;
         document.getElementById('deleteDonorBtn').href = 'donor/' + id + '/delete';
+    }
+
+    function getDonorList() {
+        document.getElementById('referrer_donor_id').innerHTML = '<option value="" selected>-</option>';
+        fetch('donor/list').then(response => response.json()).then(data => {
+            data.forEach(donor => {
+                document.getElementById('referrer_donor_id').innerHTML += "<option value='" + donor.id + "'>" + donor.id + " - " + donor.fullname + "</option>";
+            });
+        });
     }
 </script>

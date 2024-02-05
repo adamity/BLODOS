@@ -58,7 +58,7 @@
 
 <div class="modal fade" id="upsertEligibilityModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="upsertEligibilityModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <form action="eligibility" method="post">
+        <form id="upsertEligibilityForm" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="upsertEligibilityModalLabel"></h1>
@@ -85,12 +85,7 @@
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="donor_id" class="form-label">Donor<span class="text-danger">*</span></label>
-                                <!-- TODO: Get list of donor from backend -->
-                                <select class="form-select" id="donor_id" name="donor_id" required>
-                                    <option value="" selected disabled hidden>Select Donor</option>
-                                    <option value="100">100 - John Doe</option>
-                                    <option value="101">101 - Jane Doe</option>
-                                </select>
+                                <select class="form-select" id="donor_id" name="donor_id" required></select>
                             </div>
                         </div>
 
@@ -178,16 +173,48 @@
 <% } %>
 
 <script>
+    getDonorList();
+
     function upsertInit(id = null) {
         if (id) {
             document.getElementById('upsertEligibilityModalLabel').innerHTML = 'Edit Eligibility';
+            document.getElementById('upsertEligibilityForm').action = 'eligibility/' + id;
+            getEligibilityById(id);
         } else {
             document.getElementById('upsertEligibilityModalLabel').innerHTML = 'Create New Eligibility';
+            document.getElementById('upsertEligibilityForm').action = 'eligibility';
+
+            // Empty value
+            document.getElementById('donor_id').value = '';
+            document.getElementById('sleep_hours').value = '';
+            document.getElementById('meal_before_donation').value = '';
+            document.getElementById('medical_illness').value = '';
+            document.getElementById('high_risk_activity').value = '';
         }
     }
 
     function deleteInit(id) {
         document.getElementById('eligibilityID').innerHTML = id;
         document.getElementById('deleteEligibilityBtn').href = 'eligibility/' + id + '/delete';
+    }
+
+    function getEligibilityById(id) {
+        fetch('eligibility/' + id).then(response => response.json()).then(data => {
+            // Set value
+            document.getElementById('donor_id').value = data.donor_id;
+            document.getElementById('sleep_hours').value = data.sleep_hours;
+            document.getElementById('meal_before_donation').value = data.meal_before_donation;
+            document.getElementById('medical_illness').value = data.medical_illness;
+            document.getElementById('high_risk_activity').value = data.high_risk_activity;
+        });
+    }
+
+    function getDonorList() {
+        document.getElementById('donor_id').innerHTML = '<option value="" selected disabled hidden>Select Donor</option>';
+        fetch('donor/list').then(response => response.json()).then(data => {
+            data.forEach(donor => {
+                document.getElementById('donor_id').innerHTML += "<option value='" + donor.id + "'>" + donor.id + " - " + donor.fullname + "</option>";
+            });
+        });
     }
 </script>

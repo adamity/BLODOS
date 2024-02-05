@@ -1,5 +1,6 @@
 package donor;
 
+import java.util.List;
 import user.*;
 
 public class Donor {
@@ -204,5 +205,17 @@ public class Donor {
     // toJSON() method
     public String toJSON() {
         return "{\"id\":" + id + ",\"user_id\":" + user_id + ",\"referrer_donor_id\":" + referrer_donor_id + ",\"ic_number\":\"" + ic_number + "\",\"fullname\":\"" + fullname + "\",\"dob\":\"" + dob + "\",\"gender\":\"" + gender + "\",\"weight\":" + weight + ",\"height\":" + height + ",\"blood_type\":\"" + blood_type + "\"}";
+    }
+
+    public static String toJSONArray(List<Donor> donorList) {
+        StringBuilder jsonArray = new StringBuilder("[");
+        for (int i = 0; i < donorList.size(); i++) {
+            jsonArray.append(donorList.get(i).toJSON());
+            if (i < donorList.size() - 1) {
+                jsonArray.append(",");
+            }
+        }
+        jsonArray.append("]");
+        return jsonArray.toString();
     }
 }

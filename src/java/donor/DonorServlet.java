@@ -61,16 +61,19 @@ public class DonorServlet extends HttpServlet {
         } else {
             // This section will be requested by AJAX, so we don't need to forward to a JSP page but instead return JSON
             String[] pathParts = action.split("/");
-            int donorId = Integer.parseInt(pathParts[1]);
 
-            if (pathParts.length == 2) {
+            if (pathParts.length == 2 && pathParts[1].equals("list")) {
+                List<Donor> donorList = donorDAO.getAll();
+                response.setContentType("application/json");
+                response.getWriter().print(Donor.toJSONArray(donorList));
+            } else if (pathParts.length == 2) {
                 // Get donor by ID
-                Donor donor = donorDAO.getById(donorId);
+                Donor donor = donorDAO.getById(Integer.parseInt(pathParts[1]));
                 response.setContentType("application/json");
                 response.getWriter().print(donor.toJSON());
             } else if (pathParts.length == 3 && pathParts[2].equals("delete")) {
                 // Delete donor by ID
-                donorDAO.delete(donorId);
+                donorDAO.delete(Integer.parseInt(pathParts[1]));
                 response.sendRedirect(request.getContextPath() + "/donor");
             }
         }
