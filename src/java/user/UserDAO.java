@@ -18,6 +18,7 @@ public class UserDAO {
     // Implement DAO methods:
     // * getAll()
     // * getById(int id)
+    // * getByCredential(String username, String password)
     // * add(User user)
     // * update(User user)
     // * delete(int id)
@@ -112,6 +113,35 @@ public class UserDAO {
 
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    user.setId(rs.getInt("id"));
+                    user.setRole(rs.getString("role"));
+                    user.setFirstname(rs.getString("firstname"));
+                    user.setLastname(rs.getString("lastname"));
+                    user.setUsername(rs.getString("username"));
+                    user.setPassword(rs.getString("password"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    // * getByCredential(String username, String password)
+    public User getByCredential(String username, String password) {
+        User user = new User();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, username);
+                stmt.setString(2, password);
                 ResultSet rs = stmt.executeQuery();
 
                 if (rs.next()) {

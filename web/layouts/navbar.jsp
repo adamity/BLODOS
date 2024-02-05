@@ -1,4 +1,3 @@
-<!-- Get token session -->
 <%
     String token = (String) session.getAttribute("token");
     String role = (String) session.getAttribute("role");
@@ -10,10 +9,6 @@
             <a class="navbar-brand fw-bold text-seance">BLODOS</a>
         </div>
 
-        <!--
-            Only show is token is not null
-            Token is set in LoginServlet.java
-        -->
         <% if (token != null) { %>
         <div>
             <a href="RouteServlet?action=dashboard" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
@@ -32,10 +27,6 @@
                 <i class="bi bi-journal-medical me-2"></i>Donation
             </a>
 
-            <!-- 
-                Only show if role is admin
-                Role is set in LoginServlet.java
-            -->
             <% if (role != null && role.equals("admin")) { %>
             <div class="dropdown d-inline-block">
                 <button class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-start rounded-0 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,7 +40,7 @@
             </div>
             <% } %>
 
-            <a href="LogoutServlet" class="btn btn-link text-danger text-decoration-none text-capitalize px-3 border-start rounded-0">
+            <a href="auth/logout" class="btn btn-link text-danger text-decoration-none text-capitalize px-3 border-start rounded-0">
                 <i class="bi bi-box-arrow-right me-2"></i>Logout
             </a>
         </div>

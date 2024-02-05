@@ -89,6 +89,11 @@ public class User {
         this.password = password;
     }
 
+    // Other methods
+    public boolean isValid() {
+        return role != null && !role.isEmpty() && !firstname.isEmpty() && !lastname.isEmpty() && !username.isEmpty() && !password.isEmpty();
+    }
+
     // toString() method
     @Override
     public String toString() {

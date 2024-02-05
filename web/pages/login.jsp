@@ -7,14 +7,14 @@
                 <p class="fs-6 fw-light text-seance">Blood Donation System</p>
             </div>
 
-            <form action="LoginServlet" method="post" class="mt-5">
+            <form action="auth/login" method="post" class="mt-5">
                 <div class="mb-3">
-                    <label for="email" class="form-label">Username</label>
+                    <label for="email" class="form-label">Username<span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="username" name="username" required />
                 </div>
 
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
                     <input type="password" class="form-control" id="password" name="password" required />
                 </div>
 
