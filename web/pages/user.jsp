@@ -183,20 +183,12 @@
 
     function getUserById(id) {
         fetch('users/' + id).then(response => response.json()).then(data => {
-            console.log(data);
             // Set value
             document.getElementById('role').value = data.role;
             document.getElementById('firstname').value = data.firstname;
             document.getElementById('lastname').value = data.lastname;
             document.getElementById('username').value = data.username;
             document.getElementById('password').value = data.password;
-
-            // Log all values
-            console.log(document.getElementById('role').value);
-            console.log(document.getElementById('firstname').value);
-            console.log(document.getElementById('lastname').value);
-            console.log(document.getElementById('username').value);
-            console.log(document.getElementById('password').value);
         });
     }
 

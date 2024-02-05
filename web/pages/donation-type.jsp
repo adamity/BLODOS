@@ -50,7 +50,7 @@
 
 <div class="modal fade" id="upsertDonationTypeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="upsertDonationTypeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="donation-type" method="post">
+        <form id="upsertDonationTypeForm" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="upsertDonationTypeModalLabel"></h1>
@@ -109,13 +109,23 @@
     function upsertInit(id = null) {
         if (id) {
             document.getElementById('upsertDonationTypeModalLabel').innerHTML = 'Edit Donation Type';
+            document.getElementById('upsertDonationTypeForm').action = 'donation-type/' + id;
+            getDonationTypeById(id);
         } else {
             document.getElementById('upsertDonationTypeModalLabel').innerHTML = 'Create New Donation Type';
+            document.getElementById('upsertDonationTypeForm').action = 'donation-type';
         }
     }
 
     function deleteInit(id) {
         document.getElementById('donationTypeID').innerHTML = id;
         document.getElementById('deleteDonationTypeBtn').href = 'donation-type/' + id + '/delete';
+    }
+
+    function getDonationTypeById(id) {
+        fetch('donation-type/' + id).then(response => response.json()).then(data => {
+            // Set value
+            document.getElementById('type_name').value = data.type_name;
+        });
     }
 </script>
