@@ -103,6 +103,6 @@ public class User {
 
     // toJSON() method
     public String toJSON() {
-        return "{\"id\":" + id + ",\"role\":\"" + role + "\",\"firstname\":\"" + firstname + "\",\"lastname\":\"" + lastname + "\",\"username\":\"" + username + "\"}";
+        return "{\"id\":" + id + ",\"role\":\"" + role + "\",\"firstname\":\"" + firstname + "\",\"lastname\":\"" + lastname + "\",\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
     }
 }

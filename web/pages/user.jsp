@@ -43,9 +43,6 @@
                                     Delete
                                 </button>
                                 <% } %>
-
-                                <!-- Test Delete -->
-                                <!-- <a href="users/${user.getId()}/delete" class="btn btn-sm btn-link text-capitalize p-0 mx-1">Delete</a> -->
                             </td>
                         </tr>
                     </c:forEach>
@@ -57,7 +54,7 @@
 
 <div class="modal fade" id="upsertUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="upsertUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <form action="users" method="post">
+        <form id="upsertUserForm" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="upsertUserModalLabel"></h1>
@@ -115,7 +112,12 @@
                         <div class="col-12 col-lg-6">
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="password" name="password" placeholder="e.g. admin@12345" required>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="e.g. admin@12345" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="passwordToggle" onclick="togglePasswordVisibility()">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -166,13 +168,48 @@
     function upsertInit(id = null) {
         if (id) {
             document.getElementById('upsertUserModalLabel').innerHTML = 'Edit User';
+            document.getElementById('upsertUserForm').action = 'users/' + id;
+            getUserById(id);
         } else {
             document.getElementById('upsertUserModalLabel').innerHTML = 'Create New User';
+            document.getElementById('upsertUserForm').action = 'users';
         }
     }
 
     function deleteInit(id) {
         document.getElementById('userID').innerHTML = id;
         document.getElementById('deleteUserBtn').href = 'users/' + id + '/delete';
+    }
+
+    function getUserById(id) {
+        fetch('users/' + id).then(response => response.json()).then(data => {
+            console.log(data);
+            // Set value
+            document.getElementById('role').value = data.role;
+            document.getElementById('firstname').value = data.firstname;
+            document.getElementById('lastname').value = data.lastname;
+            document.getElementById('username').value = data.username;
+            document.getElementById('password').value = data.password;
+
+            // Log all values
+            console.log(document.getElementById('role').value);
+            console.log(document.getElementById('firstname').value);
+            console.log(document.getElementById('lastname').value);
+            console.log(document.getElementById('username').value);
+            console.log(document.getElementById('password').value);
+        });
+    }
+
+    function togglePasswordVisibility() {
+        let password = document.getElementById('password');
+        let passwordToggle = document.getElementById('passwordToggle');
+
+        if (password.type === 'password') {
+            password.type = 'text';
+            passwordToggle.innerHTML = '<i class="bi bi-eye-slash"></i>';
+        } else {
+            password.type = 'password';
+            passwordToggle.innerHTML = '<i class="bi bi-eye"></i>';
+        }
     }
 </script>
