@@ -1,5 +1,7 @@
 package donation;
 
+import java.util.List;
+import donationtype.*;
 import donor.*;
 import user.*;
 
@@ -135,6 +137,11 @@ public class Donation {
     public User getStaffUser() {
         UserDAO userDAO = new UserDAO();
         return userDAO.getById(user_id);
+    }
+
+    public List<DonationType> getDonationTypes() {
+        DonationTypeDAO donationTypeDAO = new DonationTypeDAO();
+        return donationTypeDAO.getDonationTypesByDonationId(id);
     }
 
     // toString() method

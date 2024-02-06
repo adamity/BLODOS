@@ -18,6 +18,8 @@ public class DonorDAO {
     // Implement DAO methods:
     // * getAll()
     // * getById(int id)
+    // * getDonorsByStaffUserId(int userId)
+    // * getDonorsByReferrerDonorId(int referrerDonorId)
     // * add(Donor donor)
     // * update(Donor donor)
     // * delete(int id)
@@ -150,6 +152,78 @@ public class DonorDAO {
         }
 
         return donor;
+    }
+
+    // * getDonorsByStaffUserId(int userId)
+    public List<Donor> getDonorsByStaffUserId(int userId) {
+        List<Donor> donors = new ArrayList<Donor>();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT * FROM donor WHERE user_id = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, userId);
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Donor donor = new Donor();
+                    donor.setId(rs.getInt("id"));
+                    donor.setUserId(rs.getInt("user_id"));
+                    donor.setReferrerDonorId(rs.getInt("referrer_donor_id"));
+                    donor.setIcNumber(rs.getString("ic_number"));
+                    donor.setFullname(rs.getString("fullname"));
+                    donor.setDob(rs.getString("dob"));
+                    donor.setGender(rs.getString("gender"));
+                    donor.setWeight(rs.getInt("weight"));
+                    donor.setHeight(rs.getInt("height"));
+                    donor.setBloodType(rs.getString("blood_type"));
+                    donors.add(donor);
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return donors;
+    }
+
+    // * getDonorsByReferrerDonorId(int referrerDonorId)
+    public List<Donor> getDonorsByReferrerDonorId(int referrerDonorId) {
+        List<Donor> donors = new ArrayList<Donor>();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT * FROM donor WHERE referrer_donor_id = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, referrerDonorId);
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Donor donor = new Donor();
+                    donor.setId(rs.getInt("id"));
+                    donor.setUserId(rs.getInt("user_id"));
+                    donor.setReferrerDonorId(rs.getInt("referrer_donor_id"));
+                    donor.setIcNumber(rs.getString("ic_number"));
+                    donor.setFullname(rs.getString("fullname"));
+                    donor.setDob(rs.getString("dob"));
+                    donor.setGender(rs.getString("gender"));
+                    donor.setWeight(rs.getInt("weight"));
+                    donor.setHeight(rs.getInt("height"));
+                    donor.setBloodType(rs.getString("blood_type"));
+                    donors.add(donor);
+                }
+
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return donors;
     }
 
     // * add(Donor donor)

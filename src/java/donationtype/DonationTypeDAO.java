@@ -18,6 +18,7 @@ public class DonationTypeDAO {
     // Implement DAO methods:
     // * getAll()
     // * getById(int id)
+    // * getDonationTypesByDonationId(int donationId) // Bridge table donation->donation_donation_type<-donation_type
     // * add(DonationType donationType)
     // * update(DonationType donationType)
     // * delete(int id)
@@ -120,6 +121,34 @@ public class DonationTypeDAO {
         }
 
         return donationType;
+    }
+
+    // * getDonationTypesByDonationId(int donationId) // Bridge table donation->donation_donation_type<-donation_type
+    public List<DonationType> getDonationTypesByDonationId(int donationId) {
+        List<DonationType> donationTypes = new ArrayList<DonationType>();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT * FROM donation_type JOIN donation_donation_type ON donation_type.id = donation_donation_type.donation_type_id WHERE donation_donation_type.donation_id = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, donationId);
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    DonationType donationType = new DonationType();
+                    donationType.setId(rs.getInt("id"));
+                    donationType.setTypeName(rs.getString("type_name"));
+                    donationTypes.add(donationType);
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return donationTypes;
     }
 
     // * add(DonationType donationType)

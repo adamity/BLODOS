@@ -18,6 +18,9 @@ public class DonationDAO {
     // Implement DAO methods:
     // * getAll()
     // * getById(int id)
+    // * getDonationsByStaffUserId(int userId)
+    // * getDonationsByDonorId(int donorId)
+    // * getDonationsByDonationTypeId(int donationTypeId) // Bridge table donation->donation_donation_type<-donation_type
     // * add(Donation donation)
     // * update(Donation donation)
     // * delete(int id)
@@ -165,6 +168,105 @@ public class DonationDAO {
         }
 
         return donation;
+    }
+
+    // * getDonationsByStaffUserId(int userId)
+    public List<Donation> getDonationsByStaffUserId(int userId) {
+        List<Donation> donations = new ArrayList<Donation>();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT * FROM donation WHERE user_id = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, userId);
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Donation donation = new Donation();
+                    donation.setId(rs.getInt("id"));
+                    donation.setDonorId(rs.getInt("donor_id"));
+                    donation.setUserId(rs.getInt("user_id"));
+                    donation.setDate(rs.getString("date"));
+                    donation.setTime(rs.getString("time"));
+                    donation.setQuantity(rs.getInt("quantity"));
+                    donation.setStatus(rs.getString("status"));
+                    donations.add(donation);
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return donations;
+    }
+
+    // * getDonationsByDonationTypeId(int donationTypeId)
+    public List<Donation> getDonationsByDonationTypeId(int donationTypeId) {
+        List<Donation> donations = new ArrayList<Donation>();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT * FROM donation JOIN donation_donation_type ON donation.id = donation_donation_type.donation_id WHERE donation_donation_type.donation_type_id = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, donationTypeId);
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Donation donation = new Donation();
+                    donation.setId(rs.getInt("id"));
+                    donation.setDonorId(rs.getInt("donor_id"));
+                    donation.setUserId(rs.getInt("user_id"));
+                    donation.setDate(rs.getString("date"));
+                    donation.setTime(rs.getString("time"));
+                    donation.setQuantity(rs.getInt("quantity"));
+                    donation.setStatus(rs.getString("status"));
+                    donations.add(donation);
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return donations;
+    }
+
+    // * getDonationsByDonorId(int donorId)
+    public List<Donation> getDonationsByDonorId(int donorId) {
+        List<Donation> donations = new ArrayList<Donation>();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT * FROM donation WHERE donor_id = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, donorId);
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Donation donation = new Donation();
+                    donation.setId(rs.getInt("id"));
+                    donation.setDonorId(rs.getInt("donor_id"));
+                    donation.setUserId(rs.getInt("user_id"));
+                    donation.setDate(rs.getString("date"));
+                    donation.setTime(rs.getString("time"));
+                    donation.setQuantity(rs.getInt("quantity"));
+                    donation.setStatus(rs.getString("status"));
+                    donations.add(donation);
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return donations;
     }
 
     // * add(Donation donation)

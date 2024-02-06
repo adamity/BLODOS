@@ -1,6 +1,8 @@
 package donor;
 
 import java.util.List;
+import eligibility.*;
+import donation.*;
 import user.*;
 
 public class Donor {
@@ -160,16 +162,6 @@ public class Donor {
     }
 
     // Other methods
-    public int getTotalDonation() {
-        // TODO: Implement this method
-        return 0;
-    }
-
-    public int getTotalEligibility() {
-        // TODO: Implement this method
-        return 0;
-    }
-
     public String getDobFormatted() {
         String[] dobArray = dob.split("-");
         return dobArray[2] + "/" + dobArray[1] + "/" + dobArray[0];
@@ -188,6 +180,21 @@ public class Donor {
         } else {
             return null;
         }
+    }
+
+    public List<Donor> getReferralDonors() {
+        DonorDAO donorDAO = new DonorDAO();
+        return donorDAO.getDonorsByReferrerDonorId(id);
+    }
+
+    public List<Donation> getDonations() {
+        DonationDAO donationDAO = new DonationDAO();
+        return donationDAO.getDonationsByDonorId(id);
+    }
+
+    public List<Eligibility> getEligibilities() {
+        EligibilityDAO eligibilityDAO = new EligibilityDAO();
+        return eligibilityDAO.getEligibilitiesByDonorId(id);
     }
 
     // toString() method

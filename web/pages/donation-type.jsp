@@ -31,7 +31,7 @@
                             <th scope="row">${num.index + 1}</th>
                             <td>${donationType.getId()}</td>
                             <td>${donationType.getTypeName()}</td>
-                            <td>${donationType.getTotalDonation()}</td>
+                            <td>${donationType.getDonations().size()}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonationTypeModal" onclick="upsertInit('${donationType.getId()}')">Edit</button>
                                 <% if (role != null && role.equals("admin")) { %>

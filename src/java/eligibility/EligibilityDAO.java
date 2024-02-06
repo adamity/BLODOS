@@ -18,6 +18,7 @@ public class EligibilityDAO {
     // Implement DAO methods:
     // * getAll()
     // * getById(int id)
+    // * getEligibilitiesByDonorId(int donorId)
     // * add(Eligibility eligibility)
     // * update(Eligibility eligibility)
     // * delete(int id)
@@ -147,6 +148,38 @@ public class EligibilityDAO {
         }
 
         return eligibility;
+    }
+
+    // * getEligibilitiesByDonorId(int donorId)
+    public List<Eligibility> getEligibilitiesByDonorId(int donorId) {
+        List<Eligibility> eligibilities = new ArrayList<Eligibility>();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT * FROM eligibility WHERE donor_id = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, donorId);
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Eligibility eligibility = new Eligibility();
+                    eligibility.setId(rs.getInt("id"));
+                    eligibility.setDonorId(rs.getInt("donor_id"));
+                    eligibility.setSleepHours(rs.getInt("sleep_hours"));
+                    eligibility.setMealBeforeDonation(rs.getInt("meal_before_donation"));
+                    eligibility.setMedicalIllness(rs.getInt("medical_illness"));
+                    eligibility.setHighRiskActivity(rs.getInt("high_risk_activity"));
+                    eligibilities.add(eligibility);
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return eligibilities;
     }
 
     // * add(Eligibility eligibility)

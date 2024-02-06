@@ -1,6 +1,7 @@
 package donationtype;
 
 import java.util.List;
+import donation.*;
 
 public class DonationType {
     // DonationType class represents a user in the database
@@ -43,10 +44,10 @@ public class DonationType {
         this.type_name = type_name;
     }
 
-    // Other methods
-    public int getTotalDonation() {
-        // TODO: Implement this method
-        return 0;
+    // Relationship
+    public List<Donation> getDonations() {
+        DonationDAO donationDAO = new DonationDAO();
+        return donationDAO.getDonationsByDonationTypeId(id);
     }
 
     // toString() method

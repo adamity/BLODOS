@@ -40,8 +40,8 @@
                             <td>${donor.getDobFormatted()}</td>
                             <td>${donor.getGender()}</td>
                             <td>${donor.getBloodType()}</td>
-                            <td>${donor.getTotalEligibility()}</td>
-                            <td>${donor.getTotalDonation()}</td>
+                            <td>${donor.getEligibilities().size()}</td>
+                            <td>${donor.getDonations().size()}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertDonorModal" onclick="upsertInit('${donor.getId()}')">Edit</button>
                                 <% if (role != null && role.equals("admin")) { %>

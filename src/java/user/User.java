@@ -1,5 +1,9 @@
 package user;
 
+import java.util.List;
+import donation.*;
+import donor.*;
+
 public class User {
     // User class represents a user in the database
     // - id
@@ -87,6 +91,17 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    // Relationship
+    public List<Donor> getDonors() {
+        DonorDAO donorDAO = new DonorDAO();
+        return donorDAO.getDonorsByStaffUserId(id);
+    }
+
+    public List<Donation> getDonations() {
+        DonationDAO donationDAO = new DonationDAO();
+        return donationDAO.getDonationsByStaffUserId(id);
     }
 
     // Other methods
