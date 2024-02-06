@@ -37,7 +37,7 @@
                             <td>${donor.getId()}</td>
                             <td>${donor.getIcNumber()}</td>
                             <td>${donor.getFullname()}</td>
-                            <td>${donor.getDob()}</td>
+                            <td>${donor.getDobFormatted()}</td>
                             <td>${donor.getGender()}</td>
                             <td>${donor.getBloodType()}</td>
                             <td>${donor.getTotalEligibility()}</td>

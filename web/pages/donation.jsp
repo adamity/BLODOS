@@ -34,8 +34,8 @@
                             <th scope="row">${num.index + 1}</th>
                             <td>${donation.getId()}</td>
                             <td>${donation.getDonor().getFullname()}</td>
-                            <td>${donation.getDate()}</td>
-                            <td>${donation.getTime()}</td>
+                            <td>${donation.getDateFormatted()}</td>
+                            <td>${donation.getTimeFormatted()}</td>
                             <td>${donation.getQuantity()}</td>
                             <td>${donation.getStatus()}</td>
                             <td class="text-center">

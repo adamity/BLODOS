@@ -36,9 +36,9 @@
                             <td>${eligibility.getId()}</td>
                             <td>${eligibility.getDonor().getFullname()}</td>
                             <td>${eligibility.getSleepHours()}</td>
-                            <td>${eligibility.getMealBeforeDonation()}</td>
-                            <td>${eligibility.getMedicalIllness()}</td>
-                            <td>${eligibility.getHighRiskActivity()}</td>
+                            <td>${eligibility.getMealBeforeDonation() == 1 ? 'Yes' : 'No'}</td>
+                            <td>${eligibility.getMedicalIllness() == 1 ? 'Yes' : 'No'}</td>
+                            <td>${eligibility.getHighRiskActivity() == 1 ? 'Yes' : 'No'}</td>
                             <td>${eligibility.getStatus()}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-sm btn-link text-capitalize p-0" data-bs-toggle="modal" data-bs-target="#upsertEligibilityModal" onclick="upsertInit('${eligibility.getId()}')">Edit</button>

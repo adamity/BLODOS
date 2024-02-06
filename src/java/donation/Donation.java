@@ -104,6 +104,26 @@ public class Donation {
         this.status = status;
     }
 
+    // Other methods
+    public String getDateFormatted() {
+        String[] dateParts = date.split("-");
+        return dateParts[2] + "/" + dateParts[1] + "/" + dateParts[0];
+    }
+
+    public String getTimeFormatted() {
+        String[] timeParts = time.split(":");
+        int hour = Integer.parseInt(timeParts[0]);
+        String minute = timeParts[1];
+
+        String meridiem = "AM";
+        if (hour > 12) {
+            hour -= 12;
+            meridiem = "PM";
+        }
+
+        return hour + ":" + minute + " " + meridiem;
+    }
+
     // Relationship
     public Donor getDonor() {
         DonorDAO donorDAO = new DonorDAO();

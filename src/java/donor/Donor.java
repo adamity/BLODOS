@@ -170,6 +170,11 @@ public class Donor {
         return 0;
     }
 
+    public String getDobFormatted() {
+        String[] dobArray = dob.split("-");
+        return dobArray[2] + "/" + dobArray[1] + "/" + dobArray[0];
+    }
+
     // Relationship
     public User getStaffUser() {
         UserDAO userDAO = new UserDAO();
