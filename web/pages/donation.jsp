@@ -93,52 +93,7 @@
                                 <label class="form-label">Donation Type<span class="text-danger">*</span></label>
                                 <div class="card shadow-0">
                                     <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12 col-lg-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="2" id="donation_type_whole_blood" name="donation_type_ids">
-                                                    <label class="form-check-label" for="donation_type_whole_blood">
-                                                        Whole Blood
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-lg-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="3" id="donation_type_platelets" name="donation_type_ids">
-                                                    <label class="form-check-label" for="donation_type_platelets">
-                                                        Platelets
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-lg-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="4" id="donation_type_plasma" name="donation_type_ids">
-                                                    <label class="form-check-label" for="donation_type_plasma">
-                                                        Plasma
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-lg-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="4" id="donation_type_red_cells" name="donation_type_ids">
-                                                    <label class="form-check-label" for="donation_type_red_cells">
-                                                        Red Cells
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-lg-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="4" id="donation_type_double_red_cells" name="donation_type_ids">
-                                                    <label class="form-check-label" for="donation_type_double_red_cells">
-                                                        Double Red Cells
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div class="row" id="donationTypeList"></div>
                                     </div>
                                 </div>
                             </div>
@@ -256,6 +211,11 @@
             document.getElementById('time').value = data.time.substring(0, 5);
             document.getElementById('quantity').value = data.quantity;
             document.getElementById('status').value = data.status;
+
+            // Set donation type
+            data.donation_type_list.forEach(donationType => {
+                document.getElementById('donation_type_' + donationType.id).checked = true;
+            });
         });
     }
 
@@ -269,10 +229,10 @@
     }
 
     function getDonationTypeList() {
-        // document.getElementById('donation_type_id').innerHTML = '<option value="" selected disabled hidden>Select Donation Type</option>';
+        document.getElementById('donationTypeList').innerHTML = '';
         fetch('donation-type/list').then(response => response.json()).then(data => {
             data.forEach(donationType => {
-                // document.getElementById('donation_type_id').innerHTML += "<option value='" + donationType.id + "'>" + donationType.id + " - " + donationType.type_name + "</option>";
+                document.getElementById('donationTypeList').innerHTML += "<div class='col-12 col-lg-6'><div class='form-check'><input class='form-check-input' type='checkbox' value='" + donationType.id + "' id='donation_type_" + donationType.id + "' name='donation_type_ids'><label class='form-check-label' for='donation_type_" + donationType.id + "'>" + donationType.type_name;
             });
         });
     }

@@ -160,6 +160,15 @@ public class Donation {
 
     // toJSON() method
     public String toJSON() {
-        return "{\"id\":" + id + ",\"donor_id\":" + donor_id + ",\"user_id\":" + user_id + ",\"date\":\"" + date + "\",\"time\":\"" + time + "\",\"quantity\":" + quantity + ",\"status\":\"" + status + "\"}";
+        List<DonationType> donationTypes = getDonationTypes();
+        String donationTypesJSON = "[";
+        for (int i = 0; i < donationTypes.size(); i++) {
+            donationTypesJSON += donationTypes.get(i).toJSON();
+            if (i < donationTypes.size() - 1) {
+                donationTypesJSON += ",";
+            }
+        }
+        donationTypesJSON += "]";
+        return "{\"id\":" + id + ",\"donor_id\":" + donor_id + ",\"user_id\":" + user_id + ",\"date\":\"" + date + "\",\"time\":\"" + time + "\",\"quantity\":" + quantity + ",\"status\":\"" + status + "\",\"donation_type_list\":" + donationTypesJSON + "}";
     }
 }

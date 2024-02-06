@@ -21,6 +21,7 @@ public class DonationDonationTypeDAO {
     // * add(DonationDonationType donationDonationType)
     // * update(DonationDonationType donationDonationType)
     // * delete(int id)
+    // * delete(int donation_id, int donation_type_id)
 
     public DonationDonationTypeDAO() {
         try {
@@ -208,6 +209,22 @@ public class DonationDonationTypeDAO {
 
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // * delete(int donation_id, int donation_type_id)
+    public void delete(int donation_id, int donation_type_id) {
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "DELETE FROM donation_donation_type WHERE donation_id = ? AND donation_type_id = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, donation_id);
+                stmt.setInt(2, donation_type_id);
                 stmt.executeUpdate();
             }
         } catch (SQLException e) {
