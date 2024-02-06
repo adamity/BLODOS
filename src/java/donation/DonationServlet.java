@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import utility.*;
 
 @WebServlet(name = "DonationServlet", urlPatterns = {"/donation/*"})
 public class DonationServlet extends HttpServlet {
@@ -74,41 +75,47 @@ public class DonationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getPathInfo();
+        try {
+            String action = request.getPathInfo();
+            String token = (String) request.getSession().getAttribute("token");
+            int userId = Integer.parseInt(Encryptor.decrypt(token));
 
-        if (action == null || action.equals("/")) {
-            // Add donation
-            Donation donation = new Donation(
-                Integer.parseInt(request.getParameter("donor_id")),
-                Integer.parseInt(request.getParameter("user_id")),
-                request.getParameter("date"),
-                request.getParameter("time"),
-                Integer.parseInt(request.getParameter("quantity")),
-                request.getParameter("status")
-            );
-
-            donationDAO.add(donation);
-            response.sendRedirect(request.getContextPath() + "/donation");
-        } else {
-            // Update donation by ID
-            String[] pathParts = action.split("/");
-            int donationId = Integer.parseInt(pathParts[1]);
-
-            if (pathParts.length == 2) {
-                // Update donation by ID
+            if (action == null || action.equals("/")) {
+                // Add donation
                 Donation donation = new Donation(
-                    donationId,
                     Integer.parseInt(request.getParameter("donor_id")),
-                    Integer.parseInt(request.getParameter("user_id")),
+                    userId,
                     request.getParameter("date"),
                     request.getParameter("time"),
                     Integer.parseInt(request.getParameter("quantity")),
                     request.getParameter("status")
                 );
 
-                donationDAO.update(donation);
+                donationDAO.add(donation);
                 response.sendRedirect(request.getContextPath() + "/donation");
+            } else {
+                // Update donation by ID
+                String[] pathParts = action.split("/");
+                int donationId = Integer.parseInt(pathParts[1]);
+
+                if (pathParts.length == 2) {
+                    // Update donation by ID
+                    Donation donation = new Donation(
+                        donationId,
+                        Integer.parseInt(request.getParameter("donor_id")),
+                        userId,
+                        request.getParameter("date"),
+                        request.getParameter("time"),
+                        Integer.parseInt(request.getParameter("quantity")),
+                        request.getParameter("status")
+                    );
+
+                    donationDAO.update(donation);
+                    response.sendRedirect(request.getContextPath() + "/donation");
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

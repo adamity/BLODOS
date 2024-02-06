@@ -56,7 +56,7 @@
 
 <div class="modal fade" id="upsertDonationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="upsertDonationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <form action="donation" method="post">
+        <form id="upsertDonationForm" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="upsertDonationModalLabel"></h1>
@@ -178,14 +178,37 @@
     function upsertInit(id = null) {
         if (id) {
             document.getElementById('upsertDonationModalLabel').innerHTML = 'Edit Donation';
+            document.getElementById('upsertDonationForm').action = 'donation/' + id;
+            getDonationById(id);
         } else {
             document.getElementById('upsertDonationModalLabel').innerHTML = 'Create New Donation';
+            document.getElementById('upsertDonationForm').action = 'donation';
+
+            // Empty value
+            document.getElementById('donor_id').value = '';
+            document.getElementById('donation_type_id').value = '';
+            document.getElementById('date').value = '';
+            document.getElementById('time').value = '';
+            document.getElementById('quantity').value = '';
+            document.getElementById('status').value = '';
         }
     }
 
     function deleteInit(id) {
         document.getElementById('donationID').innerHTML = id;
         document.getElementById('deleteDonationBtn').href = 'donation/' + id + '/delete';
+    }
+
+    function getDonationById(id) {
+        fetch('donation/' + id).then(response => response.json()).then(data => {
+            // Set value
+            document.getElementById('donor_id').value = data.donor.id;
+            document.getElementById('donation_type_id').value = '';
+            document.getElementById('date').value = data.date;
+            document.getElementById('time').value = data.time;
+            document.getElementById('quantity').value = data.quantity;
+            document.getElementById('status').value = data.status;
+        });
     }
 
     function getDonorList() {
