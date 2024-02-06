@@ -116,9 +116,11 @@ public class Donation {
         String minute = timeParts[1];
 
         String meridiem = "AM";
-        if (hour > 12) {
-            hour -= 12;
+        if (hour >= 12) {
             meridiem = "PM";
+            if (hour > 12) {
+                hour -= 12;
+            }
         }
 
         return hour + ":" + minute + " " + meridiem;

@@ -71,7 +71,7 @@ public class DonationDAO {
 
         // Test add()
         Donation donationAdd = new Donation(lastDonorID, lastUserId, "2021-01-01", "12:00:00", 470, "Pending");
-        Boolean success = donationDAO.add(donationAdd);
+        String success = donationDAO.add(donationAdd);
         System.out.println(AnsiColors.ANSI_YELLOW + "Add Donation: " + success + AnsiColors.ANSI_RESET);
         System.out.println(AnsiColors.ANSI_YELLOW_BACKGROUND + AnsiColors.ANSI_BLUE + "ADD PASSED" + AnsiColors.ANSI_RESET + "\n");
 
@@ -168,8 +168,8 @@ public class DonationDAO {
     }
 
     // * add(Donation donation)
-    public Boolean add(Donation donation) {
-        Boolean success = false;
+    public String add(Donation donation) {
+        String insertId = null;
 
         try {
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -183,7 +183,15 @@ public class DonationDAO {
                 stmt.setInt(5, donation.getQuantity());
                 stmt.setString(6, donation.getStatus());
                 stmt.executeUpdate();
-                success = true;
+
+                // Get last inserted ID
+                query = "SELECT id FROM donation ORDER BY id DESC LIMIT 1";
+                try (PreparedStatement stmt2 = conn.prepareStatement(query)) {
+                    ResultSet rs = stmt2.executeQuery();
+                    if (rs.next()) {
+                        insertId = rs.getString("id");
+                    }
+                }
             }
 
             conn.close();
@@ -191,7 +199,7 @@ public class DonationDAO {
             e.printStackTrace();
         }
 
-        return success;
+        return insertId;
     }
 
     // * update(Donation donation)

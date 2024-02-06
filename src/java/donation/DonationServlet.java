@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import donationdonationtype.*;
 import utility.*;
 
 @WebServlet(name = "DonationServlet", urlPatterns = {"/donation/*"})
@@ -91,7 +92,21 @@ public class DonationServlet extends HttpServlet {
                     request.getParameter("status")
                 );
 
-                donationDAO.add(donation);
+                String insertId = donationDAO.add(donation);
+                String[] donationTypeIds = request.getParameterValues("donation_type_ids");
+
+                if (donationTypeIds != null) {
+                    for (String donationTypeId : donationTypeIds) {
+                        DonationDonationType donationTypeDonation = new DonationDonationType(
+                            Integer.parseInt(insertId),
+                            Integer.parseInt(donationTypeId)
+                        );
+
+                        DonationDonationTypeDAO donationTypeDonationDAO = new DonationDonationTypeDAO();
+                        donationTypeDonationDAO.add(donationTypeDonation);
+                    }
+                }
+
                 response.sendRedirect(request.getContextPath() + "/donation");
             } else {
                 // Update donation by ID

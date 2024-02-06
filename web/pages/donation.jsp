@@ -90,8 +90,57 @@
 
                         <div class="col-12">
                             <div class="mb-3">
-                                <label for="donation_type_id" class="form-label">Donation Type<span class="text-danger">*</span></label>
-                                <select class="form-select" id="donation_type_id" name="donation_type_id" required></select>
+                                <label class="form-label">Donation Type<span class="text-danger">*</span></label>
+                                <div class="card shadow-0">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="2" id="donation_type_whole_blood" name="donation_type_ids">
+                                                    <label class="form-check-label" for="donation_type_whole_blood">
+                                                        Whole Blood
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-lg-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="3" id="donation_type_platelets" name="donation_type_ids">
+                                                    <label class="form-check-label" for="donation_type_platelets">
+                                                        Platelets
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-lg-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="4" id="donation_type_plasma" name="donation_type_ids">
+                                                    <label class="form-check-label" for="donation_type_plasma">
+                                                        Plasma
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-lg-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="4" id="donation_type_red_cells" name="donation_type_ids">
+                                                    <label class="form-check-label" for="donation_type_red_cells">
+                                                        Red Cells
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-lg-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="4" id="donation_type_double_red_cells" name="donation_type_ids">
+                                                    <label class="form-check-label" for="donation_type_double_red_cells">
+                                                        Double Red Cells
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -121,6 +170,7 @@
                                 <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
                                 <select class="form-select" id="status" name="status" required>
                                     <option value="" selected disabled hidden>Select Status</option>
+                                    <option value="Pending">Pending</option>
                                     <option value="Confirmed">Confirmed</option>
                                     <option value="Completed">Completed</option>
                                     <option value="Cancelled">Cancelled</option>
@@ -186,7 +236,6 @@
 
             // Empty value
             document.getElementById('donor_id').value = '';
-            document.getElementById('donation_type_id').value = '';
             document.getElementById('date').value = '';
             document.getElementById('time').value = '';
             document.getElementById('quantity').value = '';
@@ -202,10 +251,9 @@
     function getDonationById(id) {
         fetch('donation/' + id).then(response => response.json()).then(data => {
             // Set value
-            document.getElementById('donor_id').value = data.donor.id;
-            document.getElementById('donation_type_id').value = '';
+            document.getElementById('donor_id').value = data.donor_id;
             document.getElementById('date').value = data.date;
-            document.getElementById('time').value = data.time;
+            document.getElementById('time').value = data.time.substring(0, 5);
             document.getElementById('quantity').value = data.quantity;
             document.getElementById('status').value = data.status;
         });
@@ -221,10 +269,10 @@
     }
 
     function getDonationTypeList() {
-        document.getElementById('donation_type_id').innerHTML = '<option value="" selected disabled hidden>Select Donation Type</option>';
+        // document.getElementById('donation_type_id').innerHTML = '<option value="" selected disabled hidden>Select Donation Type</option>';
         fetch('donation-type/list').then(response => response.json()).then(data => {
             data.forEach(donationType => {
-                document.getElementById('donation_type_id').innerHTML += "<option value='" + donationType.id + "'>" + donationType.id + " - " + donationType.type_name + "</option>";
+                // document.getElementById('donation_type_id').innerHTML += "<option value='" + donationType.id + "'>" + donationType.id + " - " + donationType.type_name + "</option>";
             });
         });
     }
