@@ -182,6 +182,68 @@ public class EligibilityDAO {
         return eligibilities;
     }
 
+    // * getEligibleDonors()
+    public List<Eligibility> getEligibleDonors() {
+        List<Eligibility> eligibilities = new ArrayList<Eligibility>();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT * FROM eligibility WHERE id IN (SELECT MAX(id) FROM eligibility GROUP BY donor_id) AND sleep_hours >= 8 AND meal_before_donation = 1 AND medical_illness = 0 AND high_risk_activity = 0";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Eligibility eligibility = new Eligibility();
+                    eligibility.setId(rs.getInt("id"));
+                    eligibility.setDonorId(rs.getInt("donor_id"));
+                    eligibility.setSleepHours(rs.getInt("sleep_hours"));
+                    eligibility.setMealBeforeDonation(rs.getInt("meal_before_donation"));
+                    eligibility.setMedicalIllness(rs.getInt("medical_illness"));
+                    eligibility.setHighRiskActivity(rs.getInt("high_risk_activity"));
+                    eligibilities.add(eligibility);
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return eligibilities;
+    }
+
+    // * getIneligibleDonors()
+    public List<Eligibility> getIneligibleDonors() {
+        List<Eligibility> eligibilities = new ArrayList<Eligibility>();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT * FROM eligibility WHERE id IN (SELECT MAX(id) FROM eligibility GROUP BY donor_id) AND (sleep_hours < 8 OR meal_before_donation = 0 OR medical_illness = 1 OR high_risk_activity = 1)";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Eligibility eligibility = new Eligibility();
+                    eligibility.setId(rs.getInt("id"));
+                    eligibility.setDonorId(rs.getInt("donor_id"));
+                    eligibility.setSleepHours(rs.getInt("sleep_hours"));
+                    eligibility.setMealBeforeDonation(rs.getInt("meal_before_donation"));
+                    eligibility.setMedicalIllness(rs.getInt("medical_illness"));
+                    eligibility.setHighRiskActivity(rs.getInt("high_risk_activity"));
+                    eligibilities.add(eligibility);
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return eligibilities;
+    }
+
     // * add(Eligibility eligibility)
     public Boolean add(Eligibility eligibility) {
         Boolean success = false;

@@ -269,6 +269,52 @@ public class DonationDAO {
         return donations;
     }
 
+    // * getTopDonatedBloodType()
+    public String getTopDonatedBloodType() {
+        String bloodType = null;
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT blood_type FROM donor JOIN donation ON donor.id = donation.donor_id GROUP BY blood_type ORDER BY COUNT(*) DESC LIMIT 1";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    bloodType = rs.getString("blood_type");
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bloodType;
+    }
+
+    // * getTopDonationTypes()
+    public List<String> getTopDonationTypes() {
+        List<String> donationTypes = new ArrayList<String>();
+
+        try {
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            String query = "SELECT donation_type.type_name FROM donation JOIN donation_donation_type ON donation.id = donation_donation_type.donation_id JOIN donation_type ON donation_donation_type.donation_type_id = donation_type.id GROUP BY donation_type.type_name ORDER BY COUNT(*) DESC LIMIT 3;";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    donationTypes.add(rs.getString("type_name"));
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return donationTypes;
+    }
+
     // * add(Donation donation)
     public String add(Donation donation) {
         String insertId = null;
