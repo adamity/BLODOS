@@ -73,15 +73,15 @@ public class AuthServlet extends HttpServlet {
                     request.getSession().setAttribute("action", "dashboard");
                     request.getSession().setAttribute("title", "Dashboard");
                     alert = "?success=You have successfully logged in";
+                    response.sendRedirect(request.getContextPath() + "/dashboard" + alert);
                 } else {
                     alert = "?error=Invalid credentials";
+                    response.sendRedirect("../index.jsp" + alert);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        response.sendRedirect("../index.jsp" + alert);
     }
 
     @Override

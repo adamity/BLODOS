@@ -11,7 +11,7 @@
 
         <% if (token != null) { %>
         <div>
-            <a href="RouteServlet?action=dashboard" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
+            <a href="dashboard" class="btn btn-link text-dark text-decoration-none text-capitalize px-3 border-0 rounded-0">
                 <i class="bi bi-house me-2"></i>Dashboard
             </a>
 

@@ -18,7 +18,9 @@
                             <span class="fw-semibold">TOTAL DONOR</span>
                         </div>
                         <hr>
-                        <p class="mb-0 fs-1 fw-bold">100</p>
+                        <p class="mb-0 fs-1 fw-bold">
+                            ${totalDonor != null ? totalDonor : 0}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -31,7 +33,9 @@
                             <span class="fw-semibold">TOTAL ELIGIBLE DONOR</span>
                         </div>
                         <hr>
-                        <p class="mb-0 fs-1 fw-bold">69</p>
+                        <p class="mb-0 fs-1 fw-bold">
+                            ${totalEligibleDonor != null ? totalEligibleDonor : 0}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -44,7 +48,9 @@
                             <span class="fw-semibold">TOTAL INELIGIBLE DONOR</span>
                         </div>
                         <hr>
-                        <p class="mb-0 fs-1 fw-bold">31</p>
+                        <p class="mb-0 fs-1 fw-bold">
+                            ${totalIneligibleDonor != null ? totalIneligibleDonor : 0}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -60,7 +66,9 @@
                             <span class="fw-semibold">TOTAL DONATION</span>
                         </div>
                         <hr>
-                        <p class="mb-0 fs-1 fw-bold">100</p>
+                        <p class="mb-0 fs-1 fw-bold">
+                            ${totalDonation != null ? totalDonation : 0}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -73,7 +81,9 @@
                             <span class="fw-semibold">TOP DONATED BLOOD TYPE</span>
                         </div>
                         <hr>
-                        <p class="mb-0 fs-1 fw-bold">A+</p>
+                        <p class="mb-0 fs-1 fw-bold">
+                            ${topDonatedBloodType != null ? topDonatedBloodType : 'N/A'}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -88,9 +98,14 @@
                         <hr>
 
                         <ul class="list-group list-group-flush rounded">
-                            <li class="list-group-item">Whole Blood</li>
-                            <li class="list-group-item">Platelets</li>
-                            <li class="list-group-item">Plasma</li>
+                            <c:forEach items="${topDonationTypes}" var="topDonationType" varStatus="status">
+                                <c:if test="${status.index < 3}">
+                                    <li class="list-group-item">${topDonationType}</li>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${empty topDonationTypes}">
+                                <li class="list-group-item">N/A</li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
